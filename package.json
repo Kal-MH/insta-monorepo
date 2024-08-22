@@ -1,0 +1,24 @@
+{
+  "name": "insta-monorepo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "design-system": "yarn workspace @insta-monorepo/design-system"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "nohoist": [
+    "**/react-native",
+    "**/react-native/**",
+    "jetifier",
+    "react-native-safe-area-context",
+    "react-native-screens",
+    "@react-native-community/**",
+    "@react-navigation/**"
+  ]
+}
