@@ -1,11 +1,12 @@
 {
   "name": "insta-monorepo",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "design-system": "yarn workspace @insta-monorepo/design-system"
+    "design-system": "yarn workspace @insta-monorepo/design-system",
+    "web": "yarn workspace @insta-monorepo/web",
+    "mobile": "yarn workspace @insta-monorepo/mobile"
   },
   "workspaces": {
     "packages": [
