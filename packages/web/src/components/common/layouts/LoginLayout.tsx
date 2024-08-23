@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { pageRoutes } from "../../apiRoutes";
-import { isLoggedInVar } from "../../apollo";
+import { pageRoutes } from "../../../apiRoutes";
+import { isLoggedInVar } from "../../../apollo";
 
 import { useReactiveVar } from "@apollo/client";
 
@@ -13,7 +13,7 @@ export const authStatusType = {
 
 interface LayoutProps {
   children: React.ReactNode;
-  authStatus: string;
+  authStatus?: string;
 }
 
 const LoginLayout = ({
@@ -27,6 +27,10 @@ const LoginLayout = ({
 
   if (authStatus === authStatusType.NEED_LOGIN && !isLoggedIn) {
     return <Navigate to={pageRoutes.login} />;
+  }
+
+  if (authStatus === authStatusType.NEED_NOT_LOGIN && isLoggedIn) {
+    return <Navigate to={pageRoutes.home} />;
   }
 
   return <>{children}</>;

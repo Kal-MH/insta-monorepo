@@ -1,5 +1,7 @@
 import React from "react";
-import LoginLayout, { authStatusType } from "../components/common/LoginLayout";
+import LoginLayout, {
+  authStatusType,
+} from "../components/common/layouts/LoginLayout";
 
 import { darkModeVar } from "../apollo";
 import styled from "styled-components";
