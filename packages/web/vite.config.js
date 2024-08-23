@@ -1,12 +1,13 @@
 import path from "path";
 
 import { defineConfig } from "vite";
-import eslint from "vite-plugin-eslint";
+// import eslint from "vite-plugin-eslint";
 import react from "@vitejs/plugin-react";
 
+//eslint({ exclude: ["/virtual:/**", "node_modules/**"] })
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), eslint({ exclude: ["/virtual:/**", "node_modules/**"] })],
+  plugins: [react()],
   resolve: {
     alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
     // alias: {
