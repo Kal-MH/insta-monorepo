@@ -22,6 +22,7 @@ import { logUserIn } from "@/apollo";
 import LoginLayout, {
   authStatusType,
 } from "@/components/common/layouts/LoginLayout";
+import { useLocation } from "react-router-dom";
 
 interface FormProps {
   username: string;
@@ -44,13 +45,21 @@ const LOGIN_MUTATION = gql`
 `;
 
 const Login = () => {
+  const location = useLocation();
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     setError,
     clearErrors,
-  } = useForm<FormProps>();
+  } = useForm<FormProps>({
+    mode: "onChange",
+    defaultValues: {
+      username: location?.state?.username || "",
+      password: location?.state?.password || "",
+    },
+  });
 
   const { onChange: unOnChange, ...unRest } = register("username", {
     required: "Username is required",
@@ -106,6 +115,7 @@ const Login = () => {
           <div>
             <FontAwesomeIcon icon={faInstagram} size="3x" />
           </div>
+          <Notification>{location?.state?.message}</Notification>
           <form onSubmit={handleSubmit(onSubmitValid)}>
             <Text
               onChange={(e) => {
@@ -158,4 +168,8 @@ const FacebookLogin = styled.div`
     margin-left: 10px;
     font-weight: 600;
   }
+`;
+
+const Notification = styled.div`
+  color: #2ecc71;
 `;
