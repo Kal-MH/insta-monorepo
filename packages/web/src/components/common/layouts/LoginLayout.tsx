@@ -20,9 +20,6 @@ const LoginLayout = ({
   children,
   authStatus = authStatusType.COMMON,
 }: LayoutProps) => {
-  // TODO
-  // - login여부 불러오기
-  // - Login여부에 따라서 다르게 리턴하기
   const isLoggedIn = useReactiveVar(isLoggedInVar);
 
   if (authStatus === authStatusType.NEED_LOGIN && !isLoggedIn) {

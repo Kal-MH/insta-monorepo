@@ -14,54 +14,139 @@ import BottomBox from "@/components/auth/BottomBox";
 import { pageRoutes } from "@/apiRoutes";
 import LoginButton from "@/components/auth/LoginButton";
 import PageTitle from "@/components/common/PageTitle";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
+import FormError from "@/components/auth/FormError";
+import { LoginResult } from "@/__generated__/graphql";
+import { gql, useMutation } from "@apollo/client";
+import { logUserIn } from "@/apollo";
+import LoginLayout, {
+  authStatusType,
+} from "@/components/common/layouts/LoginLayout";
+
+interface FormProps {
+  username: string;
+  password: string;
+  result?: string;
+}
+
+interface LoginMutationResult {
+  login: LoginResult;
+}
+
+const LOGIN_MUTATION = gql`
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      ok
+      token
+      error
+    }
+  }
+`;
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmitValid = (data) => {
-    console.log(data);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    setError,
+    clearErrors,
+  } = useForm<FormProps>();
+
+  const { onChange: unOnChange, ...unRest } = register("username", {
+    required: "Username is required",
+    minLength: {
+      value: 5,
+      message: "Username should be longer than 5 chars.",
+    },
+  });
+
+  const { onChange: pOnChange, ...pRest } = register("password", {
+    required: "Password is required.",
+  });
+
+  const onCompleted = (data: LoginMutationResult) => {
+    const {
+      login: { ok, token, error },
+    } = data;
+
+    if (!ok) {
+      return setError("result", {
+        message: error as string,
+      });
+    }
+
+    if (token) {
+      logUserIn(token);
+    }
   };
-  const onSubmitInvalid = (data) => {
-    console.log(data, "invalid");
+
+  const [login, { loading }] = useMutation(LOGIN_MUTATION, {
+    onCompleted,
+  });
+
+  const onSubmitValid: SubmitHandler<FormProps> = (data) => {
+    const { username, password } = data;
+    login({
+      variables: {
+        username,
+        password,
+      },
+    });
+  };
+
+  const clearLoginResultError = () => {
+    clearErrors("result");
   };
 
   return (
-    <AuthLayout>
-      <PageTitle title="Login" />
-      <FormBox>
-        <div>
-          <FontAwesomeIcon icon={faInstagram} size="3x" />
-        </div>
-        <form onSubmit={handleSubmit(onSubmitValid, onSubmitInvalid)}>
-          <Text
-            {...register("username", {
-              required: "Username is required",
-              minLength: 5,
-            })}
-            name="username"
-            placeholder="Username"
-          />
-          <Password
-            {...register("password", {
-              required: "Password is required.",
-            })}
-            name="password"
-            placeholder="Password"
-          />
-          <LoginButton>Log In</LoginButton>
-        </form>
-        <Separator />
-        <FacebookLogin>
-          <FontAwesomeIcon icon={faFacebookSquare} />
-          <span>Log in with Facebook</span>
-        </FacebookLogin>
-      </FormBox>
-      <BottomBox
-        cta="Don't have an account?"
-        linkText="Sign up"
-        link={pageRoutes.signup}
-      />
-    </AuthLayout>
+    <LoginLayout authStatus={authStatusType.NEED_NOT_LOGIN}>
+      <AuthLayout>
+        <PageTitle title="Login" />
+        <FormBox>
+          <div>
+            <FontAwesomeIcon icon={faInstagram} size="3x" />
+          </div>
+          <form onSubmit={handleSubmit(onSubmitValid)}>
+            <Text
+              onChange={(e) => {
+                clearLoginResultError();
+                unOnChange?.(e);
+              }}
+              {...unRest}
+              name="username"
+              placeholder="Username"
+              status={errors?.username?.message ? "error" : undefined}
+            />
+            <FormError errorMsg={errors?.username?.message} />
+            <Password
+              onChange={(e) => {
+                clearLoginResultError();
+                pOnChange?.(e);
+              }}
+              {...pRest}
+              name="password"
+              placeholder="Password"
+              status={errors?.password?.message ? "error" : undefined}
+            />
+            <FormError errorMsg={errors?.password?.message} />
+            <LoginButton disabled={!isValid || loading}>
+              {loading ? "...loading" : "Log In"}
+            </LoginButton>
+            <FormError errorMsg={errors?.result?.message} />
+          </form>
+          <Separator />
+          <FacebookLogin>
+            <FontAwesomeIcon icon={faFacebookSquare} />
+            <span>Log in with Facebook</span>
+          </FacebookLogin>
+        </FormBox>
+        <BottomBox
+          cta="Don't have an account?"
+          linkText="Sign up"
+          link={pageRoutes.signup}
+        />
+      </AuthLayout>
+    </LoginLayout>
   );
 };
 
