@@ -1,52 +1,74 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styled from "styled-components";
+import classNames from "classnames";
 
-interface SButtonProps {
-  color?: string;
-  margin?: string;
-  backgroundColor?: string;
-  padding?: string;
-  fontWeight?: string;
-  width?: string;
+import { ConfigContext } from "../utils/config";
+
+import "./Button.styles.scss";
+
+export type ButtonType = "basic" | "danger";
+export type ButtonHtmlType = "button" | "submit" | "reset";
+export type ButtonSizeType = "tiny" | "small" | "normal" | "large" | "xlarge";
+
+export interface ButtonProps {
+  children?: React.ReactNode;
+  htmlType?: ButtonHtmlType;
+  type?: ButtonType;
+  size?: ButtonSizeType;
+  disabled?: boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
-interface ButtonProps extends SButtonProps {
-  type: string;
-}
+const { prefix } = ConfigContext;
 
-function Button({
-  type,
-  color,
-  margin,
-  backgroundColor,
-  padding,
-  fontWeight,
-  width,
-  ...props
-}) {
-  return (
-    <SButton
-      type={type}
-      color={color}
-      margin={margin}
-      backgroundColor={backgroundColor}
-      padding={padding}
-      fontWeight={fontWeight}
-      width={width}
-      {...props}
-    />
-  );
-}
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      children,
+      htmlType,
+      type,
+      size,
+      disabled,
+      onClick,
+      className,
+      style,
+      ...props
+    },
+    ref
+  ) => {
+    const classPrefix = `${prefix}-button`;
+    const classes = classNames(
+      classPrefix,
+      `${classPrefix}--type-${type}`,
+      `${classPrefix}--size-${size}`,
+      className
+    );
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (disabled) {
+        e.preventDefault();
+        return;
+      }
+
+      onClick?.(e);
+    };
+
+    return (
+      <button
+        ref={ref}
+        className={classes}
+        type={htmlType}
+        style={style}
+        disabled={disabled}
+        onClick={handleClick}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  }
+);
+
 export default Button;
-
-const SButton = styled.button<SButtonProps>`
-  border: none;
-  border-radius: 3px;
-  color: ${(props) => props.color || "black"};
-  margin: ${(props) => props.margin};
-  background-color: ${(props) => props.backgroundColor};
-  text-align: center;
-  padding: ${(props) => props.padding};
-  font-weight: ${(props) => props.fontWeight};
-  width: ${(props) => props.width};
-`;

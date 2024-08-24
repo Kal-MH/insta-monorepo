@@ -3,13 +3,14 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
+import { Password, Text } from "@insta-monorepo/design-system";
+
 import LoginLayout, {
   authStatusType,
 } from "@/components/common/layouts/LoginLayout";
 import { FatLink } from "@/components/common/shared";
 import AuthLayout from "@/components/auth/AuthLayout";
 import FormBox from "@/components/auth/FormBox";
-import LoginInput from "@/components/auth/LoginInput";
 import LoginButton from "@/components/auth/LoginButton";
 import BottomBox from "@/components/auth/BottomBox";
 import { pageRoutes } from "@/apiRoutes";
@@ -28,10 +29,10 @@ const SignUp = () => {
             </Subtitle>
           </HeaderContainer>
           <form>
-            <LoginInput type="text" placeholder="Name" />
-            <LoginInput type="text" placeholder="Email" />
-            <LoginInput type="text" placeholder="Username" />
-            <LoginInput type="password" placeholder="Password" />
+            <Text placeholder="Name" />
+            <Text placeholder="Email" />
+            <Text placeholder="Username" />
+            <Password placeholder="Password" />
             <LoginButton>Sign up</LoginButton>
           </form>
         </FormBox>

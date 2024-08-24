@@ -7,13 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import AuthLayout from "@/components/auth/AuthLayout";
 import FormBox from "@/components/auth/FormBox";
-import LoginInput from "@/components/auth/LoginInput";
+import { Password, Text } from "@insta-monorepo/design-system";
 import Separator from "@/components/auth/Separator";
 import BottomBox from "@/components/auth/BottomBox";
 
 import { pageRoutes } from "@/apiRoutes";
 import LoginButton from "@/components/auth/LoginButton";
-import React, { useState } from "react";
 import PageTitle from "@/components/common/PageTitle";
 import { useForm } from "react-hook-form";
 
@@ -34,21 +33,19 @@ const Login = () => {
           <FontAwesomeIcon icon={faInstagram} size="3x" />
         </div>
         <form onSubmit={handleSubmit(onSubmitValid, onSubmitInvalid)}>
-          <LoginInput
+          <Text
             {...register("username", {
               required: "Username is required",
               minLength: 5,
             })}
             name="username"
-            type="text"
             placeholder="Username"
           />
-          <LoginInput
+          <Password
             {...register("password", {
               required: "Password is required.",
             })}
             name="password"
-            type="password"
             placeholder="Password"
           />
           <LoginButton>Log In</LoginButton>

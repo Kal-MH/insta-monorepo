@@ -1,0 +1,29 @@
+@import "../../styles/base/core";
+@import "../../styles/variables/color";
+
+$input-prefix: "#{$prefix}-input";
+
+.#{$input-prefix} {
+  width: 100%;
+  border-radius: 3px;
+  padding: 7px;
+  background-color: #fafafa;
+  border: 0.5px solid $borderColor;
+  margin-top: 5px;
+  box-sizing: border-box;
+  &::placeholder {
+    font-size: 12px;
+  }
+
+  &.#{$input-prefix}--focused {
+    border-color: rgb(38, 38, 38);
+  }
+
+  //   &.#{$input-prefix}--disabled {
+  //     background-color: #fbfbfb;
+  //   }
+
+  &.#{$input-prefix}--error {
+    border: 0.5px solid tomato;
+  }
+}

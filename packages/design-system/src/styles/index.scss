@@ -1,0 +1,16 @@
+@import "./base/reset";
+@import "./base/core";
+@import "./variables/color";
+@import "./helper/mixin";
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+input {
+  all: unset;
+}
+
+a {
+  text-decoration: none;
+}
