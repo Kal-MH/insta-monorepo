@@ -13,10 +13,12 @@ import LoginInput from "@/components/auth/LoginInput";
 import LoginButton from "@/components/auth/LoginButton";
 import BottomBox from "@/components/auth/BottomBox";
 import { pageRoutes } from "@/apiRoutes";
+import PageTitle from "@/components/common/PageTitle";
 
 const SignUp = () => {
   return (
     <LoginLayout authStatus={authStatusType.NEED_NOT_LOGIN}>
+      <PageTitle title="Login" />
       <AuthLayout>
         <FormBox>
           <HeaderContainer>

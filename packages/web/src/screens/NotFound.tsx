@@ -1,7 +1,13 @@
+import PageTitle from "@/components/common/PageTitle";
 import React from "react";
 
 const NotFound = () => {
-  return <div>NotFound</div>;
+  return (
+    <div>
+      <PageTitle title="Login" />
+      NotFound
+    </div>
+  );
 };
 
 export default NotFound;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styled from "styled-components";
 
 interface SInputProps {
@@ -12,37 +12,46 @@ interface SInputProps {
 
 interface InputProps extends SInputProps {
   type?: string;
+  name?: string;
   placeholder?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const Input = ({
-  type,
-  placeholder,
-  width,
-  padding,
-  backgroundColor,
-  border,
-  margin,
-  fontSize,
-  onChange,
-  ...props
-}: InputProps) => {
-  return (
-    <SInput
-      type={type}
-      placeholder={placeholder}
-      width={width}
-      padding={padding}
-      backgroundColor={backgroundColor}
-      border={border}
-      margin={margin}
-      fontSize={fontSize}
-      onChange={onChange}
-      {...props}
-    />
-  );
-};
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      type,
+      name,
+      placeholder,
+      width,
+      padding,
+      backgroundColor,
+      border,
+      margin,
+      fontSize,
+      onChange,
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <SInput
+        ref={ref}
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        width={width}
+        padding={padding}
+        backgroundColor={backgroundColor}
+        border={border}
+        margin={margin}
+        fontSize={fontSize}
+        onChange={onChange}
+        {...props}
+      />
+    );
+  }
+);
 export default Input;
 
 const SInput = styled.input<SInputProps>`

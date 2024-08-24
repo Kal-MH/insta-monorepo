@@ -15,25 +15,15 @@ import { pageRoutes } from "@/apiRoutes";
 import LoginButton from "@/components/auth/LoginButton";
 import React, { useState } from "react";
 import PageTitle from "@/components/common/PageTitle";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [usernameError, setUsernameError] = useState("");
-
-  const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsernameError("");
-    setUsername(event.target.value);
+  const { register, handleSubmit } = useForm();
+  const onSubmitValid = (data) => {
+    console.log(data);
   };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (username === "") {
-      setUsernameError("Not empty pls.");
-    }
-    if (username.length < 10) {
-      setUsernameError("too short");
-    }
-    console.log("hello");
+  const onSubmitInvalid = (data) => {
+    console.log(data, "invalid");
   };
 
   return (
@@ -43,14 +33,25 @@ const Login = () => {
         <div>
           <FontAwesomeIcon icon={faInstagram} size="3x" />
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmitValid, onSubmitInvalid)}>
           <LoginInput
+            {...register("username", {
+              required: "Username is required",
+              minLength: 5,
+            })}
+            name="username"
             type="text"
             placeholder="Username"
-            onChange={onUsernameChange}
           />
-          <LoginInput type="password" placeholder="Password" />
-          <LoginButton disabled={username === ""}>Log In</LoginButton>
+          <LoginInput
+            {...register("password", {
+              required: "Password is required.",
+            })}
+            name="password"
+            type="password"
+            placeholder="Password"
+          />
+          <LoginButton>Log In</LoginButton>
         </form>
         <Separator />
         <FacebookLogin>
