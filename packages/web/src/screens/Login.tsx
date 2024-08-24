@@ -13,18 +13,44 @@ import BottomBox from "@/components/auth/BottomBox";
 
 import { pageRoutes } from "@/apiRoutes";
 import LoginButton from "@/components/auth/LoginButton";
+import React, { useState } from "react";
+import PageTitle from "@/components/common/PageTitle";
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+
+  const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUsernameError("");
+    setUsername(event.target.value);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (username === "") {
+      setUsernameError("Not empty pls.");
+    }
+    if (username.length < 10) {
+      setUsernameError("too short");
+    }
+    console.log("hello");
+  };
+
   return (
     <AuthLayout>
+      <PageTitle title="Login" />
       <FormBox>
         <div>
           <FontAwesomeIcon icon={faInstagram} size="3x" />
         </div>
-        <form>
-          <LoginInput type="text" placeholder="Username" />
+        <form onSubmit={handleSubmit}>
+          <LoginInput
+            type="text"
+            placeholder="Username"
+            onChange={onUsernameChange}
+          />
           <LoginInput type="password" placeholder="Password" />
-          <LoginButton>Log In</LoginButton>
+          <LoginButton disabled={username === ""}>Log In</LoginButton>
         </form>
         <Separator />
         <FacebookLogin>

@@ -13,10 +13,15 @@ const SButton = styled(Button)`
 
 interface SButtonProps {
   children: ReactNode;
+  disabled?: boolean;
 }
 
-const LoginButton = ({ children }: SButtonProps) => {
-  return <SButton type="submit">{children}</SButton>;
+const LoginButton = ({ children, disabled, ...props }: SButtonProps) => {
+  return (
+    <SButton type="submit" disabled={disabled} {...props}>
+      {children}
+    </SButton>
+  );
 };
 
 export default LoginButton;

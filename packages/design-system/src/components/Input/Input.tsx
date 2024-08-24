@@ -13,6 +13,7 @@ interface SInputProps {
 interface InputProps extends SInputProps {
   type?: string;
   placeholder?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const Input = ({
@@ -24,6 +25,7 @@ const Input = ({
   border,
   margin,
   fontSize,
+  onChange,
   ...props
 }: InputProps) => {
   return (
@@ -36,6 +38,7 @@ const Input = ({
       border={border}
       margin={margin}
       fontSize={fontSize}
+      onChange={onChange}
       {...props}
     />
   );
