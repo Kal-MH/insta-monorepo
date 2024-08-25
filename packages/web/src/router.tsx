@@ -6,11 +6,11 @@ import Error from "./screens/Error";
 import Login from "./screens/Login";
 import SignUp from "./screens/SignUp";
 
-import CommonLayout from "./components/common/layouts/CommonLayout";
+import ProviderLayout from "./components/common/layouts/ProviderLayout";
 
 const router = createBrowserRouter([
   {
-    element: <CommonLayout />,
+    element: <ProviderLayout />,
     children: [
       { path: pageRoutes.home, element: <Home />, errorElement: <Error /> },
       { path: pageRoutes.login, element: <Login />, errorElement: <Error /> },

@@ -1,27 +1,25 @@
-import { Outlet } from "react-router-dom";
-import { ApolloProvider, useReactiveVar } from "@apollo/client";
-import { ThemeProvider } from "styled-components";
-import RootErrorBoundary from "@/components/common/RootErrorBoundary";
-import { client, darkModeVar } from "@/apollo";
-import { darkTheme, GlobalStyles, lightTheme } from "@/styles";
-import { HelmetProvider } from "react-helmet-async";
+import styled from "styled-components";
+import Header from "../Header";
+import { ReactNode } from "react";
 
-const CommonLayout = () => {
-  const darkMode = useReactiveVar(darkModeVar);
+interface LayoutProps {
+  children: ReactNode;
+}
 
+function CommonLayout({ children }: LayoutProps) {
   return (
     <>
-      <RootErrorBoundary>
-        <ApolloProvider client={client}>
-          <HelmetProvider>
-            <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-              <GlobalStyles />
-              <Outlet />
-            </ThemeProvider>
-          </HelmetProvider>
-        </ApolloProvider>
-      </RootErrorBoundary>
+      <Header />
+      <Content>{children}</Content>
     </>
   );
-};
+}
+
 export default CommonLayout;
+
+const Content = styled.main`
+  margin: 0 auto;
+  margin-top: 45px;
+  max-width: 930px;
+  width: 100%;
+`;

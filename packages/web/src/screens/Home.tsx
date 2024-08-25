@@ -5,13 +5,16 @@ import LoginLayout, {
 import { logUserOut } from "../apollo";
 import styled from "styled-components";
 import PageTitle from "@/components/common/PageTitle";
+import CommonLayout from "@/components/common/layouts/CommonLayout";
 
 const Home = () => {
   return (
     <LoginLayout authStatus={authStatusType.NEED_LOGIN}>
-      <PageTitle title="Home" />
-      <Title>Welcome! InstaClone Coding</Title>
-      <button onClick={() => logUserOut()}>Login out now!</button>
+      <CommonLayout>
+        <PageTitle title="Home" />
+        <Title>Welcome! InstaClone Coding</Title>
+        <button onClick={() => logUserOut()}>Login out now!</button>
+      </CommonLayout>
     </LoginLayout>
   );
 };
