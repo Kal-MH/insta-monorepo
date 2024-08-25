@@ -219,11 +219,13 @@ export type MutationResponse = {
 export type Photo = {
   __typename?: 'Photo';
   caption?: Maybe<Scalars['String']['output']>;
-  comments: Scalars['Int']['output'];
+  commentNumber: Scalars['Int']['output'];
+  comments?: Maybe<Array<Maybe<Comment>>>;
   createdAt: Scalars['String']['output'];
   file: Scalars['String']['output'];
   hashtags?: Maybe<Array<Maybe<Hashtag>>>;
   id: Scalars['Int']['output'];
+  isLiked: Scalars['Boolean']['output'];
   isMine: Scalars['Boolean']['output'];
   likes: Scalars['Int']['output'];
   updatedAt: Scalars['String']['output'];
@@ -232,6 +234,7 @@ export type Photo = {
 
 export type Query = {
   __typename?: 'Query';
+  me?: Maybe<User>;
   searchPhoto?: Maybe<Array<Maybe<Photo>>>;
   searchUser?: Maybe<Array<Maybe<User>>>;
   seeFeeds?: Maybe<Array<Maybe<Photo>>>;
