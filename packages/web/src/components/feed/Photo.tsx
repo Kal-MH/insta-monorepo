@@ -19,6 +19,7 @@ import { ApolloCache, gql, useMutation } from "@apollo/client";
 
 import PropTypes from "prop-types";
 import Comments from "./Comments";
+import { Link } from "react-router-dom";
 
 interface PhotoProps {
   photo: PhotoGraphqlType;
@@ -77,8 +78,12 @@ const Photo = ({ photo }: PhotoProps) => {
   return (
     <PhotoContainer>
       <PhotoHeader>
-        <Avatar lg url={user.avatar as string} />
-        <Username>{user.username}</Username>
+        <Link to={`/users/${user.username}`}>
+          <Avatar lg url={user.avatar as string} />
+        </Link>
+        <Link to={`/users/${user.username}`}>
+          <Username>{user.username}</Username>
+        </Link>
       </PhotoHeader>
       <PhotoFile src={file} />
       <PhotoData>

@@ -2,7 +2,7 @@ import { isLoggedInVar, logUserOut } from "@/apollo";
 import { gql, useQuery, useReactiveVar } from "@apollo/client";
 import { useEffect } from "react";
 
-const ME_QUERY = gql`
+export const ME_QUERY = gql`
   query me {
     me {
       username

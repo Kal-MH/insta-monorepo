@@ -7,6 +7,7 @@ import Login from "./screens/Login";
 import SignUp from "./screens/SignUp";
 
 import ProviderLayout from "./components/common/layouts/ProviderLayout";
+import Profile from "./screens/Profile";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
       { path: pageRoutes.home, element: <Home />, errorElement: <Error /> },
       { path: pageRoutes.login, element: <Login />, errorElement: <Error /> },
       { path: pageRoutes.signup, element: <SignUp />, errorElement: <Error /> },
+      { path: pageRoutes.users, element: <Profile />, errorElement: <Error /> },
       { path: "*", element: <NotFound /> },
     ],
   },
