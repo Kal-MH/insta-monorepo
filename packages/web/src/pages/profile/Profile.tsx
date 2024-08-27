@@ -22,48 +22,15 @@ import { Button, Avatar } from "@insta-monorepo/design-system";
 import useUser from "@/hooks/useUser";
 import PageTitle from "@/components/PageTitle";
 import { FatText } from "@/components/shared";
-
-const FOLLOW_USER_MUTATION = gql`
-  mutation followUser($username: String!) {
-    followUser(username: $username) {
-      ok
-    }
-  }
-`;
-
-const UNFOLLOW_USER_MUTATION = gql`
-  mutation unfollowUser($username: String!) {
-    unfollowUser(username: $username) {
-      ok
-    }
-  }
-`;
-
-const SEE_PROFILE_QUERY = gql`
-  query seeProfile($username: String!) {
-    seeProfile(username: $username) {
-      firstName
-      lastName
-      username
-      bio
-      avatar
-      photos {
-        ...PhotoFragment
-      }
-      totalFollowing
-      totalFollowers
-      isMe
-      isFollowing
-    }
-  }
-  ${PHOTO_FRAGMENT}
-`;
+import { useSeeProfile } from "./hooks/useSeeProfile";
+import { useFollowUser } from "./hooks/useFollowUser";
+import { useUnFollowUser } from "./hooks/useUnFollowUser";
 
 const Profile = () => {
   const { username } = useParams();
   const userData = useUser();
   const client = useApolloClient();
-  const { data, loading } = useQuery(SEE_PROFILE_QUERY, {
+  const { data, loading } = useSeeProfile({
     variables: {
       username,
     },
@@ -134,14 +101,14 @@ const Profile = () => {
     });
   };
 
-  const [followUserMutation] = useMutation(FOLLOW_USER_MUTATION, {
+  const [followUserMutation] = useFollowUser({
     variables: {
       username,
     },
     onCompleted: followUserCompleted,
   });
 
-  const [unFollowUserMutation] = useMutation(UNFOLLOW_USER_MUTATION, {
+  const [unFollowUserMutation] = useUnFollowUser({
     variables: {
       username,
     },

@@ -10,7 +10,6 @@ import LoginLayout, { authStatusType } from "@/components/layouts/LoginLayout";
 import FormBox from "@/pages/auth/components/FormBox";
 import BottomBox from "@/pages/auth/components/BottomBox";
 import { pageRoutes } from "@/apiRoutes";
-import { gql, useMutation } from "@apollo/client";
 import { CreateAccountResult } from "@/__generated__/graphql";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormError from "@/pages/auth/components/FormError";
@@ -18,6 +17,7 @@ import { ChangeEvent } from "react";
 import PageTitle from "@/components/PageTitle";
 import AuthLayout from "./components/layouts/AuthLayout";
 import { FatLink } from "@/components/shared";
+import { useCreateAccount } from "./hooks/useCreateAccount";
 
 interface CreateAccountMutationResult {
   createAccount: CreateAccountResult;
@@ -31,27 +31,6 @@ interface FormProps {
   password: string;
   result?: string;
 }
-
-const CREATE_ACCOUNT_MUTATION = gql`
-  mutation createAccount(
-    $firstName: String!
-    $lastName: String
-    $username: String!
-    $email: String!
-    $password: String!
-  ) {
-    createAccount(
-      firstName: $firstName
-      lastName: $lastName
-      username: $username
-      email: $email
-      password: $password
-    ) {
-      ok
-      error
-    }
-  }
-`;
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -105,9 +84,7 @@ const SignUp = () => {
     });
   };
 
-  const [createAccount, { loading }] = useMutation(CREATE_ACCOUNT_MUTATION, {
-    onCompleted,
-  });
+  const [createAccount, { loading }] = useCreateAccount({ onCompleted });
   const onSubmitValid: SubmitHandler<FormProps> = (data) => {
     if (loading) {
       return;

@@ -15,11 +15,11 @@ import { pageRoutes } from "@/apiRoutes";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormError from "@/pages/auth/components/FormError";
 import { LoginResult } from "@/__generated__/graphql";
-import { gql, useMutation } from "@apollo/client";
 import { logUserIn } from "@/apollo/apollo";
 import LoginLayout, { authStatusType } from "@/components/layouts/LoginLayout";
 import { useLocation } from "react-router-dom";
 import PageTitle from "@/components/PageTitle";
+import { useLogin } from "./hooks/useLogin";
 
 interface FormProps {
   username: string;
@@ -30,16 +30,6 @@ interface FormProps {
 interface LoginMutationResult {
   login: LoginResult;
 }
-
-const LOGIN_MUTATION = gql`
-  mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      ok
-      token
-      error
-    }
-  }
-`;
 
 const Login = () => {
   const location = useLocation();
@@ -86,9 +76,7 @@ const Login = () => {
     }
   };
 
-  const [login, { loading }] = useMutation(LOGIN_MUTATION, {
-    onCompleted,
-  });
+  const [login, { loading }] = useLogin({ onCompleted });
 
   const onSubmitValid: SubmitHandler<FormProps> = (data) => {
     const { username, password } = data;
