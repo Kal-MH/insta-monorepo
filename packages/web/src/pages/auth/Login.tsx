@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AuthLayout from "@/pages/auth/components/layouts/AuthLayout";
 import FormBox from "@/pages/auth/components/FormBox";
 import { Button, Password, Text } from "@insta-monorepo/design-system";
-import Separator from "@/components/Separator";
+import Separator from "./components/Separator";
 import BottomBox from "@/pages/auth/components/BottomBox";
 
 import { pageRoutes } from "@/apiRoutes";

@@ -18,7 +18,7 @@ import {
   UnfollowUserResult,
   User as UserGraphqlProps,
 } from "@/__generated__/graphql";
-import { Button } from "@insta-monorepo/design-system";
+import { Button, Avatar } from "@insta-monorepo/design-system";
 import useUser from "@/hooks/useUser";
 import PageTitle from "@/components/PageTitle";
 import { FatText } from "@/components/shared";
@@ -187,7 +187,12 @@ const Profile = () => {
         />
         <div>
           <Header>
-            <Avatar src={data?.seeProfile?.avatar} />
+            <ProfileAvatar
+              src={data?.seeProfile?.avatar}
+              alt="profile"
+              placeholder="/profile.png"
+              size={160}
+            />
             <Column>
               <Row>
                 <Username>{data?.seeProfile?.username}</Username>
@@ -250,13 +255,10 @@ interface PhotoProps {
 const Header = styled.div`
   display: flex;
 `;
-const Avatar = styled.img`
+
+const ProfileAvatar = styled(Avatar)`
   margin-left: 50px;
-  height: 160px;
-  width: 160px;
-  border-radius: 50%;
-  margin-right: 150px;
-  background-color: #2c2c2c;
+  margin-right: 110px;
 `;
 const Column = styled.div``;
 const Username = styled.h3`
@@ -325,6 +327,6 @@ const Icon = styled.span`
 const ProfileBtn = styled(Button)`
   margin-left: 10px;
   margin-top: 0px;
-  padding: 5px 10px;
+  padding: 5px 10px !important;
   cursor: pointer;
 `;

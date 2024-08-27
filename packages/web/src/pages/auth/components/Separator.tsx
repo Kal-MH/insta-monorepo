@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Divider } from "@insta-monorepo/design-system";
 
 const SSeparator = styled.div`
   margin: 20px 0px 30px 0px;
@@ -7,11 +8,6 @@ const SSeparator = styled.div`
   justify-content: center;
   width: 100%;
   align-items: center;
-  div {
-    width: 100%;
-    height: 1px;
-    background-color: ${(props) => props.theme.borderColor};
-  }
   span {
     margin: 0px 10px;
     font-weight: 600;
@@ -23,9 +19,9 @@ const SSeparator = styled.div`
 const Separator = () => {
   return (
     <SSeparator>
-      <div></div>
+      <Divider />
       <span>Or</span>
-      <div></div>
+      <Divider />
     </SSeparator>
   );
 };

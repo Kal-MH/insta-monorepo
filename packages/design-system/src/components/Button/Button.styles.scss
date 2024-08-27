@@ -39,17 +39,17 @@ $button-prefix: "#{$prefix}-button";
   }
 
   &.#{$button-prefix}--size-small {
-    padding: 6px 0px;
+    padding: 6px 10px;
     font-size: $fontSize-small;
   }
 
   &.#{$button-prefix}--size-normal {
-    padding: 8px 0px;
+    padding: 8px 10px;
     font-size: $fontSize-normal;
   }
 
   &.#{$button-prefix}--size-large {
-    padding: 10px 0px;
+    padding: 10px 10px;
     font-size: $fontSize-large;
   }
 

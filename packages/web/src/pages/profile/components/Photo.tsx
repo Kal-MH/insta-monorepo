@@ -17,9 +17,9 @@ import { ApolloCache, gql, useMutation } from "@apollo/client";
 
 import Comments from "./Comments";
 import { Link } from "react-router-dom";
-import Avatar from "@/components/Avatar";
 import { FatText } from "@/components/shared";
 import Likes from "./Likes";
+import { Avatar } from "@insta-monorepo/design-system";
 
 interface PhotoProps {
   photo: PhotoGraphqlType;
@@ -79,7 +79,11 @@ const Photo = ({ photo }: PhotoProps) => {
     <PhotoContainer>
       <PhotoHeader>
         <Link to={`/users/${user.username}`}>
-          <Avatar lg url={user.avatar as string} />
+          <Avatar
+            size={30}
+            src={user.avatar as string}
+            placeholder="/profile.png"
+          />
         </Link>
         <Link to={`/users/${user.username}`}>
           <Username>{user.username}</Username>

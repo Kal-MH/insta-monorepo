@@ -8,7 +8,7 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Avatar from "./Avatar";
+import { Avatar } from "@insta-monorepo/design-system";
 
 function Header() {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
@@ -34,7 +34,11 @@ function Header() {
                 </Icon>
                 <Icon>
                   <Link to={`/users/${data?.me?.username}`}>
-                    <Avatar url={data?.me?.avatar} />
+                    <Avatar
+                      src={data?.me?.avatar}
+                      alt="me"
+                      placeholder="/profile.png"
+                    />
                   </Link>
                 </Icon>
               </IconsContainer>
