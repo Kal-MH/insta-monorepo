@@ -1,14 +1,12 @@
-import LoginLayout, {
-  authStatusType,
-} from "../components/common/layouts/LoginLayout";
+import LoginLayout, { authStatusType } from "@/components/layouts/LoginLayout";
 
-import PageTitle from "@/components/common/PageTitle";
-import CommonLayout from "@/components/common/layouts/CommonLayout";
+import CommonLayout from "@/components/layouts/CommonLayout";
 import { gql, useQuery } from "@apollo/client";
 
 import { Photo as PhotoGraphqlType } from "@/__generated__/graphql";
-import Photo from "@/components/feed/Photo";
+import Photo from "@/pages/profile/components/Photo";
 import { PHOTO_FRAGMENT, COMMENT_FRAGMENT } from "@/apollo/fragments";
+import PageTitle from "@/components/PageTitle";
 
 export const FEED_QUERY = gql`
   query seeFeeds {

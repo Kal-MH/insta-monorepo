@@ -1,5 +1,5 @@
 import { pageRoutes } from "@/apiRoutes";
-import { isLoggedInVar } from "@/apollo";
+import { isLoggedInVar } from "@/apollo/apollo";
 import useUser from "@/hooks/useUser";
 import { useReactiveVar } from "@apollo/client";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";

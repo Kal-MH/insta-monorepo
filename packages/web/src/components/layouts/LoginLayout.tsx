@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { pageRoutes } from "../../../apiRoutes";
-import { isLoggedInVar } from "../../../apollo";
+import { pageRoutes } from "../../apiRoutes";
+import { isLoggedInVar } from "../../apollo/apollo";
 
 import { useReactiveVar } from "@apollo/client";
 

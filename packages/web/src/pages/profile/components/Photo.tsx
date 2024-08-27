@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { FatText } from "../common/shared";
-import Avatar from "@/components/common/Avatar";
 
 import {
   faBookmark,
@@ -17,9 +15,11 @@ import {
 } from "@/__generated__/graphql";
 import { ApolloCache, gql, useMutation } from "@apollo/client";
 
-import PropTypes from "prop-types";
 import Comments from "./Comments";
 import { Link } from "react-router-dom";
+import Avatar from "@/components/Avatar";
+import { FatText } from "@/components/shared";
+import Likes from "./Likes";
 
 interface PhotoProps {
   photo: PhotoGraphqlType;
@@ -68,7 +68,7 @@ const Photo = ({ photo }: PhotoProps) => {
     });
   };
 
-  const [toggleLikeMutation, { loading }] = useMutation(TOGGLE_LIKE_MUTATION, {
+  const [toggleLikeMutation] = useMutation(TOGGLE_LIKE_MUTATION, {
     variables: {
       id,
     },
@@ -86,7 +86,7 @@ const Photo = ({ photo }: PhotoProps) => {
         </Link>
       </PhotoHeader>
       <PhotoFile src={file} />
-      <PhotoData>
+      <PhotoDescription>
         <PhotoActions>
           <div>
             <PhotoAction
@@ -102,13 +102,13 @@ const Photo = ({ photo }: PhotoProps) => {
             <PhotoAction>
               <FontAwesomeIcon icon={faComment} />
             </PhotoAction>
-            <PhotoAction>
+            {/* <PhotoAction>
               <FontAwesomeIcon icon={faPaperPlane} />
-            </PhotoAction>
+            </PhotoAction> */}
           </div>
-          <div>
+          {/* <div>
             <FontAwesomeIcon icon={faBookmark} />
-          </div>
+          </div> */}
         </PhotoActions>
         <Likes>{likes === 1 ? "1 like" : `${likes} likes`}</Likes>
         <Comments
@@ -118,26 +118,12 @@ const Photo = ({ photo }: PhotoProps) => {
           commentNumber={commentNumber}
           comments={comments as CommentGraphqlType[]}
         />
-      </PhotoData>
+      </PhotoDescription>
     </PhotoContainer>
   );
 };
 
 export default Photo;
-
-// Photo.propTypes = {
-//   id: PropTypes.number.isRequired,
-//   user: PropTypes.shape({
-//     avatar: PropTypes.string,
-//     username: PropTypes.string.isRequired,
-//   }),
-//   caption: PropTypes.string,
-//   file: PropTypes.string.isRequired,
-//   isLiked: PropTypes.bool.isRequired,
-//   likes: PropTypes.number.isRequired,
-//   commentNumber: PropTypes.number.isRequired,
-//   comments: PropTypes.arrayOf(PropTypes.shape({})),
-// };
 
 const PhotoContainer = styled.div`
   background-color: white;
@@ -163,7 +149,7 @@ const PhotoFile = styled.img`
   object-fit: contain;
 `;
 
-const PhotoData = styled.div`
+const PhotoDescription = styled.div`
   padding: 12px 15px;
 `;
 
@@ -183,9 +169,4 @@ const PhotoActions = styled.div`
 const PhotoAction = styled.div`
   cursor: pointer;
   margin-right: 10px;
-`;
-
-const Likes = styled(FatText)`
-  margin-top: 15px;
-  display: block;
 `;

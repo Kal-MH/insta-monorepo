@@ -1,5 +1,4 @@
-import PageTitle from "@/components/common/PageTitle";
-import React from "react";
+import PageTitle from "@/components/PageTitle";
 
 const NotFound = () => {
   return (

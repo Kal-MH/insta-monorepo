@@ -8,7 +8,7 @@ import "./Button.styles.scss";
 
 export type ButtonType = "basic" | "danger";
 export type ButtonHtmlType = "button" | "submit" | "reset";
-export type ButtonSizeType = "tiny" | "small" | "normal" | "large" | "xlarge";
+export type ButtonSizeType = "small" | "normal" | "large";
 
 export interface ButtonProps {
   children?: React.ReactNode;
@@ -28,8 +28,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     {
       children,
       htmlType,
-      type,
-      size,
+      type = "basic",
+      size = "normal",
       disabled,
       onClick,
       className,

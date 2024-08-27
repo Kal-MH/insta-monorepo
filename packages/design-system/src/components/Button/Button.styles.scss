@@ -6,11 +6,9 @@ $button-prefix: "#{$prefix}-button";
 .#{$button-prefix} {
   border: none;
   border-radius: 3px;
-  margin-top: 12px;
-  background-color: $accent;
+  background-color: $basic;
   color: white;
   text-align: center;
-  padding: 8px 0px;
   font-weight: 600;
   width: 100%;
   opacity: 1;
@@ -29,8 +27,31 @@ $button-prefix: "#{$prefix}-button";
     }
   }
 
-  // &.#{$button-prefix}--type-danger {
-  // }
+  &.#{$button-prefix}--type-danger {
+    background-color: $danger;
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:disabled {
+      opacity: 0.2;
+    }
+  }
+
+  &.#{$button-prefix}--size-small {
+    padding: 6px 0px;
+    font-size: $fontSize-small;
+  }
+
+  &.#{$button-prefix}--size-normal {
+    padding: 8px 0px;
+    font-size: $fontSize-normal;
+  }
+
+  &.#{$button-prefix}--size-large {
+    padding: 10px 0px;
+    font-size: $fontSize-large;
+  }
 
   &:disabled {
     cursor: not-allowed;

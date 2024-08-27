@@ -54,7 +54,6 @@ const Comments = ({
         createComment: { ok, id },
       },
     } = result;
-    console.log(cache);
     if (!ok || !userData?.me) return;
 
     const newComment = {

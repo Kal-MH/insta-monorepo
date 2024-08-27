@@ -4,23 +4,20 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
-import { Password, Text } from "@insta-monorepo/design-system";
+import { Button, Password, Text } from "@insta-monorepo/design-system";
 
-import LoginLayout, {
-  authStatusType,
-} from "@/components/common/layouts/LoginLayout";
-import { FatLink } from "@/components/common/shared";
-import AuthLayout from "@/components/auth/AuthLayout";
-import FormBox from "@/components/auth/FormBox";
-import LoginButton from "@/components/auth/LoginButton";
-import BottomBox from "@/components/auth/BottomBox";
+import LoginLayout, { authStatusType } from "@/components/layouts/LoginLayout";
+import FormBox from "@/pages/auth/components/FormBox";
+import BottomBox from "@/pages/auth/components/BottomBox";
 import { pageRoutes } from "@/apiRoutes";
-import PageTitle from "@/components/common/PageTitle";
 import { gql, useMutation } from "@apollo/client";
 import { CreateAccountResult } from "@/__generated__/graphql";
 import { SubmitHandler, useForm } from "react-hook-form";
-import FormError from "@/components/auth/FormError";
+import FormError from "@/pages/auth/components/FormError";
 import { ChangeEvent } from "react";
+import PageTitle from "@/components/PageTitle";
+import AuthLayout from "./components/layouts/AuthLayout";
+import { FatLink } from "@/components/shared";
 
 interface CreateAccountMutationResult {
   createAccount: CreateAccountResult;
@@ -167,9 +164,9 @@ const SignUp = () => {
               onChange={(e) => clearResultErrors(e, pOnChange)}
               placeholder="Password"
             />
-            <LoginButton disabled={!isValid || loading}>
+            <SignupButton htmlType="submit" disabled={!isValid || loading}>
               {loading ? "Loading..." : "Sign up"}
-            </LoginButton>
+            </SignupButton>
             <FormError errorMsg={errors?.result?.message} />
           </form>
         </FormBox>
@@ -195,4 +192,8 @@ const Subtitle = styled(FatLink)`
   font-size: 16px;
   text-align: center;
   margin-top: 10px;
+`;
+
+const SignupButton = styled(Button)`
+  margin-top: 12px;
 `;

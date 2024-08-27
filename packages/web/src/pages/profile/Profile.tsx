@@ -1,31 +1,27 @@
 import {
   ApolloCache,
   gql,
-  MutationResult,
   useApolloClient,
   useMutation,
   useQuery,
 } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { PHOTO_FRAGMENT } from "@/apollo/fragments";
-import CommonLayout from "@/components/common/layouts/CommonLayout";
+import CommonLayout from "@/components/layouts/CommonLayout";
 import styled from "styled-components";
-import { FatText } from "@/components/common/shared";
-import LoginLayout, {
-  authStatusType,
-} from "@/components/common/layouts/LoginLayout";
+import LoginLayout, { authStatusType } from "@/components/layouts/LoginLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment, faHeart } from "@fortawesome/free-solid-svg-icons";
 import {
-  FollowUserResult,
   MutationResponse,
   Photo as PhotoGraphqlProps,
   UnfollowUserResult,
   User as UserGraphqlProps,
 } from "@/__generated__/graphql";
 import { Button } from "@insta-monorepo/design-system";
-import PageTitle from "@/components/common/PageTitle";
-import useUser, { ME_QUERY } from "../hooks/useUser";
+import useUser from "@/hooks/useUser";
+import PageTitle from "@/components/PageTitle";
+import { FatText } from "@/components/shared";
 
 const FOLLOW_USER_MUTATION = gql`
   mutation followUser($username: String!) {

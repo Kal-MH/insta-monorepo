@@ -5,24 +5,21 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import AuthLayout from "@/components/auth/AuthLayout";
-import FormBox from "@/components/auth/FormBox";
-import { Password, Text } from "@insta-monorepo/design-system";
-import Separator from "@/components/auth/Separator";
-import BottomBox from "@/components/auth/BottomBox";
+import AuthLayout from "@/pages/auth/components/layouts/AuthLayout";
+import FormBox from "@/pages/auth/components/FormBox";
+import { Button, Password, Text } from "@insta-monorepo/design-system";
+import Separator from "@/components/Separator";
+import BottomBox from "@/pages/auth/components/BottomBox";
 
 import { pageRoutes } from "@/apiRoutes";
-import LoginButton from "@/components/auth/LoginButton";
-import PageTitle from "@/components/common/PageTitle";
 import { SubmitHandler, useForm } from "react-hook-form";
-import FormError from "@/components/auth/FormError";
+import FormError from "@/pages/auth/components/FormError";
 import { LoginResult } from "@/__generated__/graphql";
 import { gql, useMutation } from "@apollo/client";
-import { logUserIn } from "@/apollo";
-import LoginLayout, {
-  authStatusType,
-} from "@/components/common/layouts/LoginLayout";
+import { logUserIn } from "@/apollo/apollo";
+import LoginLayout, { authStatusType } from "@/components/layouts/LoginLayout";
 import { useLocation } from "react-router-dom";
+import PageTitle from "@/components/PageTitle";
 
 interface FormProps {
   username: string;
@@ -139,7 +136,7 @@ const Login = () => {
               status={errors?.password?.message ? "error" : undefined}
             />
             <FormError errorMsg={errors?.password?.message} />
-            <LoginButton disabled={!isValid || loading}>
+            <LoginButton htmlType="submit" disabled={!isValid || loading}>
               {loading ? "...loading" : "Log In"}
             </LoginButton>
             <FormError errorMsg={errors?.result?.message} />
@@ -172,4 +169,8 @@ const FacebookLogin = styled.div`
 
 const Notification = styled.div`
   color: #2ecc71;
+`;
+
+const LoginButton = styled(Button)`
+  margin-top: 12px;
 `;

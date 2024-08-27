@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import { pageRoutes } from "./apiRoutes";
-import Home from "./screens/Home";
-import NotFound from "./screens/NotFound";
-import Error from "./screens/Error";
-import Login from "./screens/Login";
-import SignUp from "./screens/SignUp";
+import Error from "@/components/Error";
+import Home from "@/pages/home/Home";
+import Login from "@/pages/auth/Login";
+import NotFound from "@/pages/NotFound";
+import Profile from "@/pages/profile/Profile";
+import SignUp from "@/pages/auth/SignUp";
 
-import ProviderLayout from "./components/common/layouts/ProviderLayout";
-import Profile from "./screens/Profile";
+import ProviderLayout from "./components/layouts/ProviderLayout";
 
 const router = createBrowserRouter([
   {

@@ -1,4 +1,4 @@
-import { isLoggedInVar, logUserOut } from "@/apollo";
+import { isLoggedInVar, logUserOut } from "@/apollo/apollo";
 import { gql, useQuery, useReactiveVar } from "@apollo/client";
 import { useEffect } from "react";
 

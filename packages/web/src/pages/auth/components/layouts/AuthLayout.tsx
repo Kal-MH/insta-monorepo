@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { faMoon, faSun } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useReactiveVar } from "@apollo/client";
-import { darkModeVar, disableDarkMode, enableDarkMode } from "@/apollo";
+import { darkModeVar, disableDarkMode, enableDarkMode } from "@/apollo/apollo";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -14,9 +14,9 @@ function AuthLayout({ children }: AuthLayoutProps) {
     <Container>
       <Wrapper>{children}</Wrapper>
       <Footer>
-        <DarkModeBtn onClick={darkMode ? disableDarkMode : enableDarkMode}>
+        {/* <DarkModeBtn onClick={darkMode ? disableDarkMode : enableDarkMode}>
           <FontAwesomeIcon icon={darkMode ? faSun : faMoon} fontSize="20px" />
-        </DarkModeBtn>
+        </DarkModeBtn> */}
       </Footer>
     </Container>
   );

@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { FatText } from "../common/shared";
 import React from "react";
 import { Link } from "react-router-dom";
 import { ApolloCache, gql, useMutation } from "@apollo/client";
 import { DeleteCommentResult } from "@/__generated__/graphql";
+import { FatText } from "@/components/shared";
 
 interface CommentProps {
   id?: Number;
