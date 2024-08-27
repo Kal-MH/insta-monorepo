@@ -1,12 +1,5 @@
-import {
-  ApolloCache,
-  gql,
-  useApolloClient,
-  useMutation,
-  useQuery,
-} from "@apollo/client";
+import { ApolloCache, useApolloClient } from "@apollo/client";
 import { useParams } from "react-router-dom";
-import { PHOTO_FRAGMENT } from "@/apollo/fragments";
 import CommonLayout from "@/components/layouts/CommonLayout";
 import styled from "styled-components";
 import LoginLayout, { authStatusType } from "@/components/layouts/LoginLayout";
@@ -25,6 +18,7 @@ import { FatText } from "@/components/shared";
 import { useSeeProfile } from "./hooks/useSeeProfile";
 import { useFollowUser } from "./hooks/useFollowUser";
 import { useUnFollowUser } from "./hooks/useUnFollowUser";
+import toast from "react-hot-toast";
 
 const Profile = () => {
   const { username } = useParams();
@@ -42,16 +36,18 @@ const Profile = () => {
   ) => {
     const {
       data: {
-        unfollowUser: { ok },
+        unfollowUser: { ok, error },
       },
     } = result;
 
-    if (!ok) return;
+    if (!ok) {
+      return toast.error(error);
+    }
 
     cache.modify({
       id: `User:${username}`,
       fields: {
-        isFollowing(prev) {
+        isFollowing() {
           return false;
         },
         totalFollowers(prev) {
@@ -73,16 +69,18 @@ const Profile = () => {
 
   const followUserCompleted = (data: { followUser: MutationResponse }) => {
     const {
-      followUser: { ok },
+      followUser: { ok, error },
     } = data;
 
-    if (!ok) return;
+    if (!ok) {
+      return toast.error(error as string);
+    }
 
     const { cache } = client;
     cache.modify({
       id: `User:${username}`,
       fields: {
-        isFollowing(prev) {
+        isFollowing() {
           return true;
         },
         totalFollowers(prev) {
@@ -99,6 +97,8 @@ const Profile = () => {
         totalFollowing: (prev) => prev + 1,
       },
     });
+
+    toast.success("팔로우 추가!");
   };
 
   const [followUserMutation] = useFollowUser({

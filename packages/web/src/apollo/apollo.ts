@@ -49,6 +49,21 @@ const authLink = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
+// const errorLink = onError(({ graphQLErrors, networkError }) => {
+//   if (networkError) {
+//     toast.error("Please check your internet connection.", {
+//       position: "bottom-center",
+//     });
+//     return;
+//   }
+//   if (graphQLErrors) {
+//     toast.error(graphQLErrors[0].message, {
+//       position: "bottom-center",
+//     });
+//     return;
+//   }
+// });
+
 export const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache({
