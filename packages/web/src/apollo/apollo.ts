@@ -1,3 +1,4 @@
+import { getItem, removeItem, setItem } from "@/utils/localStorage";
 import {
   ApolloClient,
   ApolloLink,
@@ -14,24 +15,24 @@ export const isLoggedInVar = makeVar(Boolean(localStorage.getItem(TOKEN)));
 export const darkModeVar = makeVar(Boolean(localStorage.getItem(DARK_MODE)));
 
 export const logUserIn = (token: string) => {
-  localStorage.setItem(TOKEN, token);
+  setItem(TOKEN, token);
   isLoggedInVar(true);
   window.location.reload();
 };
 
 export const logUserOut = () => {
-  localStorage.removeItem(TOKEN);
+  removeItem(TOKEN);
   isLoggedInVar(false);
   // window.location.reload();
 };
 
 export const enableDarkMode = () => {
-  localStorage.setItem(DARK_MODE, "enabled");
+  setItem(DARK_MODE, "enabled");
   darkModeVar(true);
 };
 
 export const disableDarkMode = () => {
-  localStorage.removeItem(DARK_MODE);
+  removeItem(DARK_MODE);
   darkModeVar(false);
 };
 
@@ -43,7 +44,7 @@ const authLink = new ApolloLink((operation, forward) => {
   operation.setContext((context: DefaultContext) => ({
     headers: {
       ...context.headers,
-      token: localStorage.getItem(TOKEN),
+      token: getItem(TOKEN),
     },
   }));
   return forward(operation);
