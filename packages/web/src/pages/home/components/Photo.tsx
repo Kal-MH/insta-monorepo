@@ -1,129 +1,74 @@
 import styled from "styled-components";
 
-import {
-  faBookmark,
-  faComment,
-  faHeart,
-  faPaperPlane,
-} from "@fortawesome/free-regular-svg-icons";
+import { faComment } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as SolidHeart } from "@fortawesome/free-solid-svg-icons";
-import {
-  Comment as CommentGraphqlType,
-  Photo as PhotoGraphqlType,
-  ToggleLikeResult,
-} from "@/__generated__/graphql";
-import { ApolloCache, gql, useMutation } from "@apollo/client";
+import { Photo as PhotoGraphqlType } from "@/__generated__/graphql";
 
-import Comments from "./Comments";
 import { Link } from "react-router-dom";
 import { FatText } from "@/components/shared";
-import Likes from "./Likes";
 import { Avatar } from "@insta-monorepo/design-system";
+import useModal from "@/hooks/useModal";
+import PhotoModal from "./PhotoModal";
+import CommentForm from "./CommentForm";
+import Comment from "./Comment";
+import LikesAction from "./LikesAction";
 
 interface PhotoProps {
   photo: PhotoGraphqlType;
 }
 
-const TOGGLE_LIKE_MUTATION = gql`
-  mutation toggleLike($id: Int!) {
-    toggleLike(id: $id) {
-      ok
-      error
-    }
-  }
-`;
-
 const Photo = ({ photo }: PhotoProps) => {
-  const { id, user, file, caption, isLiked, likes, commentNumber, comments } =
-    photo;
-
-  const updateToggleLike = (
-    cache: ApolloCache<ToggleLikeResult>,
-    result: any
-  ) => {
-    const {
-      data: {
-        toggleLike: { ok },
-      },
-    } = result;
-
-    if (!ok) return;
-
-    const photoId = `Photo:${id}`;
-    cache.modify({
-      id: photoId,
-      fields: {
-        isLiked(prev) {
-          return !prev;
-        },
-        likes: (prev) => {
-          if (isLiked) {
-            //isLiked from props
-            return prev - 1;
-          }
-          return prev + 1;
-        },
-      },
-    });
-  };
-
-  const [toggleLikeMutation] = useMutation(TOGGLE_LIKE_MUTATION, {
-    variables: {
-      id,
-    },
-    update: updateToggleLike,
-  });
+  const { id, user, file, isLiked, likes, commentNumber } = photo;
+  const { isModalOpened, toggleIsModalOpened } = useModal(false);
 
   return (
-    <PhotoContainer>
-      <PhotoHeader>
-        <Link to={`/users/${user.username}`}>
-          <Avatar
-            size={30}
-            src={user.avatar as string}
-            placeholder="/profile.png"
-          />
-        </Link>
-        <Link to={`/users/${user.username}`}>
-          <Username>{user.username}</Username>
-        </Link>
-      </PhotoHeader>
-      <PhotoFile src={file} />
-      <PhotoDescription>
-        <PhotoActions>
-          <div>
-            <PhotoAction
-              onClick={() => {
-                toggleLikeMutation();
-              }}
-            >
-              <FontAwesomeIcon
-                style={{ color: isLiked ? "tomato" : "inherit" }}
-                icon={isLiked ? SolidHeart : faHeart}
-              />
-            </PhotoAction>
-            <PhotoAction>
-              <FontAwesomeIcon icon={faComment} />
-            </PhotoAction>
-            {/* <PhotoAction>
-              <FontAwesomeIcon icon={faPaperPlane} />
-            </PhotoAction> */}
-          </div>
-          {/* <div>
-            <FontAwesomeIcon icon={faBookmark} />
-          </div> */}
-        </PhotoActions>
-        <Likes>{likes === 1 ? "1 like" : `${likes} likes`}</Likes>
-        <Comments
-          photoId={id}
-          author={user.username}
-          caption={caption as string}
-          commentNumber={commentNumber}
-          comments={comments as CommentGraphqlType[]}
-        />
-      </PhotoDescription>
-    </PhotoContainer>
+    <>
+      <PhotoContainer>
+        <PhotoHeader>
+          <Link to={`/users/${user.username}`}>
+            <Avatar
+              size={30}
+              src={user.avatar as string}
+              placeholder="/profile.png"
+            />
+          </Link>
+          <Link to={`/users/${user.username}`}>
+            <Username>{user.username}</Username>
+          </Link>
+        </PhotoHeader>
+        <PhotoFile src={file} />
+        <PhotoDescription>
+          <PhotoActions>
+            <div>
+              <LikesAction photoId={id} isLiked={isLiked} />
+              <PhotoAction>
+                <FontAwesomeIcon icon={faComment} />
+              </PhotoAction>
+            </div>
+          </PhotoActions>
+          <LikesText>{`좋아요 ${likes}개`}</LikesText>
+          <CommentContainer>
+            <Comment
+              author={photo.user.username}
+              payload={photo.caption || ""}
+            />
+            {commentNumber > 0 && (
+              <>
+                <CommentClickBtn onClick={toggleIsModalOpened}>
+                  댓글 {commentNumber}개 모두 보기
+                </CommentClickBtn>
+              </>
+            )}
+            <CommentForm photoId={photo.id} />
+          </CommentContainer>
+        </PhotoDescription>
+      </PhotoContainer>
+      <PhotoModal
+        photo={photo}
+        isModalOpened={isModalOpened}
+        onClose={toggleIsModalOpened}
+      />
+    </>
   );
 };
 
@@ -173,4 +118,26 @@ const PhotoActions = styled.div`
 const PhotoAction = styled.div`
   cursor: pointer;
   margin-right: 10px;
+`;
+
+const CommentContainer = styled.div`
+  margin-top: 5px;
+`;
+
+const CommentClickBtn = styled.button`
+  margin: 10px 0px;
+  display: block;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.5);
+
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+`;
+
+const LikesText = styled(FatText)`
+  margin-top: 15px;
+  display: block;
 `;
