@@ -3,6 +3,10 @@
 @import "./variables/color";
 @import "./helper/mixin";
 
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
 }

@@ -2,6 +2,6 @@
   "compilerOptions": {
     "jsx": "react",
     "esModuleInterop": true,
-    "types": ["react", "react-native"]
+    "types": ["react", "react-native", "react-dom"]
   }
 }
