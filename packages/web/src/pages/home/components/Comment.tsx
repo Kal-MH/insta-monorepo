@@ -89,6 +89,9 @@ const CommentContainer = styled.div`
 `;
 const CommentCaption = styled.span`
   margin-left: 10px;
+  white-space: pre-line;
+  line-height: 1.4;
+
   a {
     background-color: inherit;
     color: ${(props) => props.theme.accent};

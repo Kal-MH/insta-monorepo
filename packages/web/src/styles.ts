@@ -1,16 +1,37 @@
 import { createGlobalStyle, DefaultTheme } from "styled-components";
 import reset from "styled-reset";
 
+const navWidth = {
+  min: "72px",
+  max: "240px",
+};
+
+const breakPoints = {
+  desktop: 1200,
+  tablet: 768,
+  mobile: 600,
+};
+
+const device = {
+  desktop: "",
+  tablet: `screen and (max-width: ${breakPoints.desktop}px)`,
+  mobile: `screen and (max-width: ${breakPoints.tablet}px)`,
+};
+
 export const lightTheme: DefaultTheme = {
   accent: "#0095f6",
   bgColor: "#FAFAFA",
   fontColor: "rgb(38, 38, 38)",
   borderColor: "rgb(219, 219, 219)",
+  device,
+  navWidth,
 };
 
 export const darkTheme: DefaultTheme = {
   fontColor: "#fff",
   bgColor: "#000",
+  device,
+  navWidth,
 };
 
 export const GlobalStyles = createGlobalStyle`

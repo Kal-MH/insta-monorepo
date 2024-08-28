@@ -152,7 +152,7 @@ const Profile = () => {
             loading ? "Loading..." : `${data?.seeProfile?.username}'s Profile`
           }
         />
-        <div>
+        <Container>
           <Header>
             <ProfileAvatar
               src={data?.seeProfile?.avatar}
@@ -207,7 +207,7 @@ const Profile = () => {
               </Photo>
             ))}
           </Grid>
-        </div>
+        </Container>
       </CommonLayout>
     </LoginLayout>
   );
@@ -221,6 +221,12 @@ interface PhotoProps {
 
 const Header = styled.div`
   display: flex;
+`;
+
+const Container = styled.div`
+  width: 100%;
+  max-width: 930px;
+  padding: 0 16px;
 `;
 
 const ProfileAvatar = styled(Avatar)`

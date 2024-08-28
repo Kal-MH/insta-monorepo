@@ -6,5 +6,14 @@ declare module "styled-components" {
     bgColor?: string;
     fontColor?: string;
     borderColor?: string;
+    device: {
+      mobile: string;
+      tablet: string;
+      desktop: string;
+    };
+    navWidth: {
+      min: string;
+      max: string;
+    };
   }
 }

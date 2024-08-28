@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ReactNode } from "react";
-import Header from "../Header";
+import Sidebar from "../Sidebar";
 
 interface LayoutProps {
   children: ReactNode;
@@ -9,7 +9,7 @@ interface LayoutProps {
 function CommonLayout({ children }: LayoutProps) {
   return (
     <>
-      <Header />
+      <Sidebar />
       <Content>{children}</Content>
     </>
   );
@@ -18,8 +18,16 @@ function CommonLayout({ children }: LayoutProps) {
 export default CommonLayout;
 
 const Content = styled.main`
+  min-width: 930px;
+  padding: 0 16px;
+
   margin: 0 auto;
   margin-top: 45px;
-  max-width: 930px;
-  width: 100%;
+  margin-left: ${(props) => props.theme.navWidth.max};
+  display: flex;
+  justify-content: center;
+
+  @media ${(props) => props.theme.device.tablet} {
+    margin-left: ${(props) => props.theme.navWidth.min};
+  }
 `;
