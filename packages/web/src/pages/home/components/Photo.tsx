@@ -7,20 +7,18 @@ import { Photo as PhotoGraphqlType } from "@/__generated__/graphql";
 import { Link } from "react-router-dom";
 import { FatText } from "@/components/shared";
 import { Avatar } from "@insta-monorepo/design-system";
-import useModal from "@/hooks/useModal";
-import PhotoModal from "./PhotoModal";
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";
 import LikesAction from "./LikesAction";
-import useLazyLoadImage from "@/hooks/useLazyloadImage";
+import useLazyLoadImage from "@/hooks/useLazyLoadImage";
 
 interface PhotoProps {
   photo: PhotoGraphqlType;
+  onCommentClick: () => void;
 }
 
-const Photo = ({ photo }: PhotoProps) => {
+const Photo = ({ photo, onCommentClick }: PhotoProps) => {
   const { id, user, file, isLiked, likes, commentNumber } = photo;
-  const { isModalOpened, toggleIsModalOpened } = useModal(false);
   const { loaded, imageRef } = useLazyLoadImage();
 
   return (
@@ -62,7 +60,7 @@ const Photo = ({ photo }: PhotoProps) => {
             />
             {commentNumber > 0 && (
               <>
-                <CommentClickBtn onClick={toggleIsModalOpened}>
+                <CommentClickBtn onClick={onCommentClick}>
                   댓글 {commentNumber}개 모두 보기
                 </CommentClickBtn>
               </>
@@ -71,11 +69,6 @@ const Photo = ({ photo }: PhotoProps) => {
           </CommentContainer>
         </PhotoDescription>
       </PhotoContainer>
-      <PhotoModal
-        photo={photo}
-        isModalOpened={isModalOpened}
-        onClose={toggleIsModalOpened}
-      />
     </>
   );
 };

@@ -5,6 +5,7 @@ import { Photo as PhotoGraphqlProps } from "@/__generated__/graphql";
 import useModal from "@/hooks/useModal";
 import PhotoModal from "@/pages/home/components/PhotoModal";
 import { useState } from "react";
+import Photo from "./Photo";
 
 interface PhotoProps {
   bg: string;
@@ -27,11 +28,12 @@ const GridPhotos = ({ photos = [] }: GridPhotosProps) => {
     <>
       <Grid>
         {photos.map((photo: PhotoGraphqlProps, idx) => (
-          <Photo
+          <PhotoContainer
             key={photo.id}
             bg={photo.file}
             onClick={() => handlePhotoClick(idx)}
           >
+            <Photo src={photo.file} alt="photo" placeholder="/profile.png" />
             <Icons>
               <Icon>
                 <FontAwesomeIcon icon={faHeart} />
@@ -42,7 +44,7 @@ const GridPhotos = ({ photos = [] }: GridPhotosProps) => {
                 {photo.commentNumber}
               </Icon>
             </Icons>
-          </Photo>
+          </PhotoContainer>
         ))}
       </Grid>
       {curPhotoIdx !== null && (
@@ -66,9 +68,9 @@ const Grid = styled.div`
   margin-top: 50px;
 `;
 
-const Photo = styled.div<PhotoProps>`
-  background-image: url(${(props) => props.bg});
-  background-size: cover;
+const PhotoContainer = styled.div<PhotoProps>`
+  /* background-image: url(${(props) => props.bg}); */
+  /* background-size: cover; */
   position: relative;
   cursor: pointer;
 `;

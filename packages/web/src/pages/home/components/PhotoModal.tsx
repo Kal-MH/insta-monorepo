@@ -79,21 +79,14 @@ export default PhotoModal;
 
 const Container = styled.div`
   display: flex;
-
-  @media ${(props) => props.theme.device.tablet} {
-    height: 600px;
-    width: 900px;
-    /* aspect-ratio: 1 / 1; */
-    /* flex-basis: 655px; */
-  }
 `;
 
 const LeftContainer = styled.div`
   background-color: black;
-  max-height: 855px;
-  max-width: 855px;
+  max-height: 755px;
+  max-width: 755px;
   aspect-ratio: 1 / 1;
-  flex-basis: 855px;
+  flex-basis: 755px;
 
   display: flex;
   flex-direction: column;
@@ -103,24 +96,18 @@ const LeftContainer = styled.div`
     height: 100%;
     object-fit: contain;
   }
-
-  @media ${(props) => props.theme.device.tablet} {
-    max-height: 600px;
-    max-width: 600px;
-    flex-basis: 600px;
-  }
 `;
 const RightContainer = styled.div`
-  min-width: 340px;
-  max-height: 855px;
+  min-width: 280px;
+  max-height: 755px;
   background-color: white;
 
   display: flex;
   flex-direction: column;
 
   @media ${(props) => props.theme.device.tablet} {
-    min-width: 0;
-    max-width: 300px;
+    /* min-width: 0;
+    max-width: 300px; */
   }
 `;
 
