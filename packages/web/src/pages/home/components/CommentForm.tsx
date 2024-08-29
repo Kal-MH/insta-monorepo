@@ -72,7 +72,7 @@ const CommentForm = ({ photoId }: CommentFormProps) => {
       id: `Photo:${photoId}`,
       fields: {
         comments(prev) {
-          return [...prev, newCacheComment];
+          return [newCacheComment, ...prev];
         },
         commentNumber(prev) {
           return prev + 1;

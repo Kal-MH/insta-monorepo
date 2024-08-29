@@ -20,6 +20,7 @@ const Comments = ({ photoId, comments }: CommentsProps) => {
           author={comment.user.username}
           payload={comment.payload}
           avatar={comment.user.avatar || ""}
+          createdAt={comment.createdAt}
         />
       ))}
     </CommentsContainer>

@@ -10,6 +10,20 @@ export const PHOTO_FRAGMENT = gql`
   }
 `;
 
+export const PHOTO_PROFILE_FRAGMENT = gql`
+  fragment PhotoProfileFragment on Photo {
+    id
+    file
+    likes
+    commentNumber
+    isLiked
+    user {
+      username
+      avatar
+    }
+  }
+`;
+
 export const COMMENT_FRAGMENT = gql`
   fragment CommentFragment on Comment {
     id

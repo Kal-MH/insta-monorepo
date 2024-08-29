@@ -43,10 +43,12 @@ const PhotoModal = ({ photo, isModalOpened, onClose }: PhotoModalProps) => {
               </Link>
             </Header>
             <Content>
-              <Caption
-                author={photo.user.username}
-                payload={photo.caption || ""}
-              />
+              <Caption>
+                <Comment
+                  author={photo.user.username}
+                  payload={photo.caption || ""}
+                />
+              </Caption>
               <Comments
                 photoId={photo.id}
                 comments={(photo.comments as CommentGraphqlType[]) || []}
@@ -89,6 +91,11 @@ const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  img {
+    height: 100%;
+    object-fit: contain;
+  }
 `;
 const RightContainer = styled.div`
   min-width: 370px;
@@ -142,8 +149,9 @@ const Content = styled.div`
   }
 `;
 
-const Caption = styled(Comment)`
+const Caption = styled.div`
   line-height: 1;
+  margin-bottom: 30px;
 `;
 
 const Footer = styled.div`

@@ -36,7 +36,9 @@ const Photo = ({ photo }: PhotoProps) => {
             <Username>{user.username}</Username>
           </Link>
         </PhotoHeader>
-        <PhotoFile src={file} />
+        <PhotoFile>
+          <img src={file} alt="photo" />
+        </PhotoFile>
         <PhotoDescription>
           <PhotoActions>
             <div>
@@ -92,10 +94,17 @@ const Username = styled(FatText)`
   margin-left: 15px;
 `;
 
-const PhotoFile = styled.img`
-  /* max-width: 615px; */
-  width: 100%;
-  object-fit: contain;
+const PhotoFile = styled.div`
+  max-width: 615px;
+  max-height: 855px;
+  aspect-ratio: 1 / 1;
+  background-color: black;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 `;
 
 const PhotoDescription = styled.div`

@@ -37,7 +37,6 @@ const Modal = ({
     console.log("click target");
   };
   const handleOutsideClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
-    console.dir(e);
     if (
       targetRef.current &&
       !targetRef.current.contains(e.target as HTMLElement)
@@ -51,7 +50,7 @@ const Modal = ({
     ref: targetRef,
     onClick: (e: any) => {
       e.stopPropagation();
-      handleClick();
+      // handleClick();
     },
   });
 
