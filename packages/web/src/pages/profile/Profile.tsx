@@ -3,11 +3,8 @@ import { useParams } from "react-router-dom";
 import CommonLayout from "@/components/layouts/CommonLayout";
 import styled from "styled-components";
 import LoginLayout, { authStatusType } from "@/components/layouts/LoginLayout";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComment, faHeart } from "@fortawesome/free-solid-svg-icons";
 import {
   MutationResponse,
-  Photo as PhotoGraphqlProps,
   UnfollowUserResult,
   User as UserGraphqlProps,
 } from "@/__generated__/graphql";
@@ -19,6 +16,7 @@ import { useSeeProfile } from "./hooks/useSeeProfile";
 import { useFollowUser } from "./hooks/useFollowUser";
 import { useUnFollowUser } from "./hooks/useUnFollowUser";
 import toast from "react-hot-toast";
+import GridPhotos from "./components/GridPhotos";
 
 const Profile = () => {
   const { username } = useParams();
@@ -119,7 +117,9 @@ const Profile = () => {
     const { isMe, isFollowing } = profiles;
 
     if (isMe) {
-      return <ProfileBtn>Edit Profile</ProfileBtn>;
+      //TODO: Edit Profile
+      // return <ProfileBtn>Edit Profile</ProfileBtn>;
+      return null;
     }
     if (isFollowing) {
       return (
@@ -191,22 +191,7 @@ const Profile = () => {
               <Row>{data?.seeProfile?.bio}</Row>
             </Column>
           </Header>
-          <Grid>
-            {data?.seeProfile?.photos.map((photo: PhotoGraphqlProps) => (
-              <Photo key={photo.id} bg={photo.file}>
-                <Icons>
-                  <Icon>
-                    <FontAwesomeIcon icon={faHeart} />
-                    {photo.likes}
-                  </Icon>
-                  <Icon>
-                    <FontAwesomeIcon icon={faComment} />
-                    {photo.commentNumber}
-                  </Icon>
-                </Icons>
-              </Photo>
-            ))}
-          </Grid>
+          <GridPhotos photos={data?.seeProfile?.photos} />
         </Container>
       </CommonLayout>
     </LoginLayout>
@@ -214,10 +199,6 @@ const Profile = () => {
 };
 
 export default Profile;
-
-interface PhotoProps {
-  bg: string;
-}
 
 const Header = styled.div`
   display: flex;
@@ -255,46 +236,6 @@ const Value = styled(FatText)`
 `;
 const Name = styled(FatText)`
   font-size: 20px;
-`;
-
-const Grid = styled.div`
-  display: grid;
-  grid-auto-rows: 290px;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  margin-top: 50px;
-`;
-
-const Photo = styled.div<PhotoProps>`
-  background-image: url(${(props) => props.bg});
-  background-size: cover;
-  position: relative;
-`;
-
-const Icons = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  opacity: 0;
-  &:hover {
-    opacity: 1;
-  }
-`;
-
-const Icon = styled.span`
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  margin: 0px 5px;
-  svg {
-    font-size: 14px;
-    margin-right: 5px;
-  }
 `;
 
 const ProfileBtn = styled(Button)`

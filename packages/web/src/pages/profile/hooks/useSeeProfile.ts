@@ -1,5 +1,5 @@
 import { useGenericQuery } from "@/apollo/fetcher";
-import { PHOTO_FRAGMENT } from "@/apollo/fragments";
+import { COMMENT_FRAGMENT, PHOTO_PROFILE_FRAGMENT } from "@/apollo/fragments";
 import { gql, QueryHookOptions } from "@apollo/client";
 
 export const SEE_PROFILE_QUERY = gql`
@@ -11,7 +11,10 @@ export const SEE_PROFILE_QUERY = gql`
       bio
       avatar
       photos {
-        ...PhotoFragment
+        ...PhotoProfileFragment
+        comments {
+          ...CommentFragment
+        }
       }
       totalFollowing
       totalFollowers
@@ -19,7 +22,8 @@ export const SEE_PROFILE_QUERY = gql`
       isFollowing
     }
   }
-  ${PHOTO_FRAGMENT}
+  ${PHOTO_PROFILE_FRAGMENT}
+  ${COMMENT_FRAGMENT}
 `;
 
 export const useSeeProfile = (options?: QueryHookOptions) => {
