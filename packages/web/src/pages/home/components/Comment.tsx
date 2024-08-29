@@ -91,7 +91,7 @@ const Comment = ({
               {payload.split(" ").map((word, index) =>
                 /#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w-]+/.test(word) ? (
                   <React.Fragment key={index}>
-                    <Link to={`/hashtags/${word}`}>{word} </Link>
+                    <Link to={`/explore?tag=${word.slice(1)}`}>{word} </Link>
                   </React.Fragment>
                 ) : (
                   <React.Fragment key={index}>{word} </React.Fragment>

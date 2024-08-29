@@ -6,6 +6,7 @@ import Login from "@/pages/auth/Login";
 import NotFound from "@/pages/NotFound";
 import Profile from "@/pages/profile/Profile";
 import SignUp from "@/pages/auth/SignUp";
+import Explore from "./pages/explore/Explore";
 
 import ProviderLayout from "./components/layouts/ProviderLayout";
 
@@ -17,6 +18,11 @@ const router = createBrowserRouter([
       { path: pageRoutes.login, element: <Login />, errorElement: <Error /> },
       { path: pageRoutes.signup, element: <SignUp />, errorElement: <Error /> },
       { path: pageRoutes.users, element: <Profile />, errorElement: <Error /> },
+      {
+        path: pageRoutes.explore,
+        element: <Explore />,
+        errorElement: <Error />,
+      },
       { path: "*", element: <NotFound /> },
     ],
   },
