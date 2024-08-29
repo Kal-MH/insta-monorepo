@@ -4,7 +4,7 @@ const LOAD_IMAGE_EVENT = "loadImage";
 
 const observerOptions = {
   rootMargin: "200px",
-  threshold: 0.5,
+  threshold: 0.2,
 };
 
 const useLazyLoadImage = (lazy = true) => {

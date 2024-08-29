@@ -6,18 +6,37 @@ import { useSearchPhoto } from "./hooks/useSearchPhoto";
 import GridPhotos from "../profile/components/GridPhotos";
 import styled from "styled-components";
 import LoginLayout, { authStatusType } from "@/components/layouts/LoginLayout";
+import useInfiniteScroll from "@/hooks/useInfiniteScroll";
+import { useState } from "react";
+
+const LIMIT = 6;
 
 const Explore = () => {
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get("tag");
 
-  const { data } = useSearchPhoto({
+  const { data, fetchMore } = useSearchPhoto({
     variables: {
       keyword,
+      limit: LIMIT,
     },
   });
 
   const firstPhoto = data?.searchPhoto[0];
+  const [photos, setPhotos] = useState(data?.searchPhoto || []);
+  const { targetRef, setLoadFinished } = useInfiniteScroll(async () => {
+    const nextData = await fetchMore({
+      variables: {
+        lastId: photos[photos.length - 1]?.id,
+        limit: LIMIT,
+      },
+    });
+
+    setPhotos([...photos, ...nextData.data?.searchPhoto]);
+    if (nextData.data?.searchPhoto.length < LIMIT) {
+      setLoadFinished(true);
+    }
+  });
 
   return (
     <LoginLayout authStatus={authStatusType.NEED_LOGIN}>
@@ -35,9 +54,10 @@ const Explore = () => {
               <Button size="large">팔로우</Button>
             </DescriptionContainer>
           </ProfileContainer>
-          <GridPhotos photos={data?.searchPhoto} />
+          <GridPhotos photos={photos} />
         </Container>
       </CommonLayout>
+      <div ref={targetRef} />
     </LoginLayout>
   );
 };

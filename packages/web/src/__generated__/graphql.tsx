@@ -36,6 +36,7 @@ export type CreateAccountResult = {
 export type CreateCommentResult = {
   __typename?: 'CreateCommentResult';
   error?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
   ok: Scalars['Boolean']['output'];
 };
 
@@ -252,11 +253,19 @@ export type Query = {
 
 export type QuerySearchPhotoArgs = {
   keyword: Scalars['String']['input'];
+  lastId?: InputMaybe<Scalars['Int']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QuerySearchUserArgs = {
   keyword: Scalars['String']['input'];
+};
+
+
+export type QuerySeeFeedsArgs = {
+  lastId?: InputMaybe<Scalars['Int']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
 

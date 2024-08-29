@@ -3,8 +3,8 @@ import { PHOTO_FRAGMENT, COMMENT_FRAGMENT } from "@/apollo/fragments";
 import { gql, QueryHookOptions } from "@apollo/client";
 
 export const FEED_QUERY = gql`
-  query seeFeeds {
-    seeFeeds {
+  query seeFeeds($lastId: Int, $limit: Int) {
+    seeFeeds(lastId: $lastId, limit: $limit) {
       ...PhotoFragment
       user {
         username
