@@ -165,10 +165,6 @@ const PostCommentTextArea = styled(TextArea)`
   height: 30px;
   font-size: 12px;
 
-  &::placeholder {
-    font-size: 12px;
-  }
-
   &:focus {
     outline: none;
   }

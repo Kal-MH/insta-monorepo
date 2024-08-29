@@ -12,6 +12,7 @@ import PhotoModal from "./PhotoModal";
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";
 import LikesAction from "./LikesAction";
+import useLazyLoadImage from "@/hooks/useLazyloadImage";
 
 interface PhotoProps {
   photo: PhotoGraphqlType;
@@ -20,6 +21,7 @@ interface PhotoProps {
 const Photo = ({ photo }: PhotoProps) => {
   const { id, user, file, isLiked, likes, commentNumber } = photo;
   const { isModalOpened, toggleIsModalOpened } = useModal(false);
+  const { loaded, imageRef } = useLazyLoadImage();
 
   return (
     <>
@@ -37,7 +39,11 @@ const Photo = ({ photo }: PhotoProps) => {
           </Link>
         </PhotoHeader>
         <PhotoFile>
-          <img src={file} alt="photo" />
+          <img
+            ref={imageRef}
+            src={loaded ? file : "/profile.png"}
+            alt="photo"
+          />
         </PhotoFile>
         <PhotoDescription>
           <PhotoActions>
