@@ -9,8 +9,8 @@ interface LayoutProps {
 function CommonLayout({ children }: LayoutProps) {
   return (
     <>
-      <Sidebar />
       <Content>{children}</Content>
+      <Sidebar />
     </>
   );
 }

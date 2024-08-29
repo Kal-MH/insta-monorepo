@@ -3,18 +3,33 @@ import styled from "styled-components";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
-import { faHome, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { Avatar } from "@insta-monorepo/design-system";
+import {
+  faEllipsis,
+  faHome,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
+import { Avatar, Button } from "@insta-monorepo/design-system";
 import { pageRoutes } from "@/apiRoutes";
 import useUser from "@/hooks/useUser";
+import { useState } from "react";
+import { logUserOut } from "@/apollo/apollo";
 
 const Sidebar = () => {
   const { username, explore } = useParams();
   const data = useUser();
+  const [showLogout, setShowLogout] = useState(false);
 
   const isCurPage = username ? "profile" : explore ? "explore" : "home";
   const curPageIconStyle = {
     fontWeight: 600,
+  };
+
+  const handleSettingBtnClick = () => {
+    setShowLogout((prev) => !prev);
+  };
+
+  const handleLogOutBtnClick = () => {
+    logUserOut();
   };
 
   return (
@@ -39,7 +54,7 @@ const Sidebar = () => {
                 </IconText>
               </Link>
             </Icon>
-            <Icon>
+            {/* <Icon>
               <IconSvg>
                 <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
               </IconSvg>
@@ -50,7 +65,7 @@ const Sidebar = () => {
               >
                 검색
               </IconText>
-            </Icon>
+            </Icon> */}
             <Icon>
               <Link to={`/users/${data?.me?.username}`}>
                 <IconSvg>
@@ -71,7 +86,21 @@ const Sidebar = () => {
             </Icon>
           </IconsContainer>
         </Column>
-        <Column></Column>
+        <Column>
+          <Icon>
+            <IconSvg onClick={handleSettingBtnClick}>
+              <FontAwesomeIcon icon={faEllipsis} />
+            </IconSvg>
+            <IconText onClick={handleSettingBtnClick}>설정</IconText>
+          </Icon>
+          {showLogout && (
+            <LogOutContainer>
+              <LogOutButton onClick={handleLogOutBtnClick}>
+                로그아웃
+              </LogOutButton>
+            </LogOutContainer>
+          )}
+        </Column>
       </Wrapper>
     </Container>
   );
@@ -109,6 +138,11 @@ const Column = styled.div`
 
     padding-left: 12px;
   }
+
+  &:last-of-type {
+    position: absolute;
+    bottom: 0;
+  }
 `;
 
 const IconsContainer = styled.div`
@@ -144,6 +178,8 @@ const IconSvg = styled.div`
   justify-content: center;
   align-items: center;
 
+  cursor: pointer;
+
   svg {
     width: 22px;
     height: 22px;
@@ -155,8 +191,37 @@ const IconText = styled.div`
   font-size: 16px;
   height: 48px;
   line-height: 48px;
+  cursor: pointer;
 
   @media ${(props) => props.theme.device.tablet} {
     display: none;
+  }
+`;
+
+const LogOutContainer = styled.div`
+  z-index: 1000;
+  position: fixed;
+  transform: translate(12px, -250%);
+
+  width: 220px;
+  height: 45px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+`;
+
+const LogOutButton = styled(Button)`
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: ${(props) => props.theme.fontColor};
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+
+  border-radius: 10px;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;

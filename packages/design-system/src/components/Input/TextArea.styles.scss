@@ -1,0 +1,33 @@
+@import "../../styles/base/core";
+@import "../../styles/variables/color";
+
+$textarea-prefix: "#{$prefix}-textarea";
+
+.#{$textarea-prefix}--container {
+  position: relative;
+  width: 100%;
+
+  .#{$textarea-prefix} {
+    display: inline-flex;
+    padding: 10px;
+    width: 100%;
+    align-items: center;
+    font-size: 12px;
+    line-height: 18px;
+    color: #454f5b;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    box-sizing: border-box;
+    transition: border 240ms, box-shadow 240ms;
+
+    &::placeholder {
+      color: #454f5b;
+    }
+
+    &:not(.#{$textarea-prefix}--readonly):disabled {
+      color: #919eab;
+      cursor: not-allowed;
+    }
+  }
+}

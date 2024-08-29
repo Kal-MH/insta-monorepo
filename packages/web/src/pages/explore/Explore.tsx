@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { useSearchPhoto } from "./hooks/useSearchPhoto";
 import GridPhotos from "../profile/components/GridPhotos";
 import styled from "styled-components";
+import LoginLayout, { authStatusType } from "@/components/layouts/LoginLayout";
 
 const Explore = () => {
   const [searchParams] = useSearchParams();
@@ -19,23 +20,25 @@ const Explore = () => {
   const firstPhoto = data?.searchPhoto[0];
 
   return (
-    <CommonLayout>
-      <Container>
-        <ProfileContainer>
-          <ProfileAvatar
-            src={firstPhoto?.user?.avatar}
-            alt="profile"
-            placeholder="/profile.png"
-            size={160}
-          />
-          <DescriptionContainer>
-            <Keyword>#{keyword}</Keyword>
-            <Button size="large">팔로우</Button>
-          </DescriptionContainer>
-        </ProfileContainer>
-        <GridPhotos photos={data?.searchPhoto} />
-      </Container>
-    </CommonLayout>
+    <LoginLayout authStatus={authStatusType.NEED_LOGIN}>
+      <CommonLayout>
+        <Container>
+          <ProfileContainer>
+            <ProfileAvatar
+              src={firstPhoto?.user?.avatar}
+              alt="profile"
+              placeholder="/profile.png"
+              size={160}
+            />
+            <DescriptionContainer>
+              <Keyword>#{keyword}</Keyword>
+              <Button size="large">팔로우</Button>
+            </DescriptionContainer>
+          </ProfileContainer>
+          <GridPhotos photos={data?.searchPhoto} />
+        </Container>
+      </CommonLayout>
+    </LoginLayout>
   );
 };
 
