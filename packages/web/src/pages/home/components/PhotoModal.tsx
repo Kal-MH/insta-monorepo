@@ -9,6 +9,8 @@ import Comment from "./Comment";
 import LikesAction from "./LikesAction";
 import { faComment } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TimeText from "./TimeText";
+import { formatTimeDifference } from "@/utils/timeformat";
 
 interface PhotoModalProps {
   photo: Photo;
@@ -41,6 +43,9 @@ const PhotoModal = ({ photo, isModalOpened, onClose }: PhotoModalProps) => {
               <Link to={`/users/${user.username}`}>
                 <Username>{photo.user.username}</Username>
               </Link>
+              <TimeText style={{ marginLeft: "5px" }}>
+                • {formatTimeDifference(photo.createdAt)}
+              </TimeText>
             </Header>
             <Content>
               <Caption>

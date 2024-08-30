@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,11 +13,25 @@ import { pageRoutes } from "@/apiRoutes";
 import useUser from "@/hooks/useUser";
 import { useState } from "react";
 import { logUserOut } from "@/apollo/apollo";
+import { useForm } from "react-hook-form";
+import SearchInput from "./SearchInput";
+
+interface FormProps {
+  keyword: string;
+}
+
+const HIDDEN = "hidden";
+const HIDDEN_CONTAINER = "hidden-container";
 
 const Sidebar = () => {
   const { username, explore } = useParams();
+  const navigate = useNavigate();
   const data = useUser();
   const [showLogout, setShowLogout] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const { register, handleSubmit } = useForm<FormProps>({
+    mode: "onChange",
+  });
 
   const isCurPage = username ? "profile" : explore ? "explore" : "home";
   const curPageIconStyle = {
@@ -32,6 +46,15 @@ const Sidebar = () => {
     logUserOut();
   };
 
+  const handleSearchBtnClick = () => {
+    setHidden((prev) => !prev);
+  };
+
+  const onValid = (data: FormProps) => {
+    navigate(`/explore?tag=${data.keyword}`);
+    window.location.reload();
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -40,12 +63,13 @@ const Sidebar = () => {
         </Column>
         <Column>
           <IconsContainer>
-            <Icon>
+            <Icon className={hidden ? HIDDEN_CONTAINER : ""}>
               <Link to={pageRoutes.home}>
                 <IconSvg>
                   <FontAwesomeIcon icon={faHome} size="lg" />
                 </IconSvg>
                 <IconText
+                  className={hidden ? HIDDEN : ""}
                   style={{
                     ...(isCurPage === "home" ? curPageIconStyle : {}),
                   }}
@@ -54,19 +78,30 @@ const Sidebar = () => {
                 </IconText>
               </Link>
             </Icon>
-            {/* <Icon>
+            <Icon
+              className={hidden ? HIDDEN_CONTAINER : ""}
+              onClick={() => handleSearchBtnClick()}
+            >
               <IconSvg>
                 <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
               </IconSvg>
               <IconText
+                className={hidden ? HIDDEN : ""}
                 style={{
                   ...(isCurPage === "explore" ? curPageIconStyle : {}),
                 }}
               >
                 검색
               </IconText>
-            </Icon> */}
-            <Icon>
+              <SearchInput
+                hidden={!hidden}
+                setHidden={(isClose: boolean) => setHidden(isClose)}
+                onSubmit={handleSubmit(onValid)}
+                placeholder="Search a keyword..."
+                {...register("keyword")}
+              />
+            </Icon>
+            <Icon className={hidden ? HIDDEN_CONTAINER : ""}>
               <Link to={`/users/${data?.me?.username}`}>
                 <IconSvg>
                   <Avatar
@@ -76,6 +111,7 @@ const Sidebar = () => {
                   />
                 </IconSvg>
                 <IconText
+                  className={hidden ? HIDDEN : ""}
                   style={{
                     ...(isCurPage === "profile" ? curPageIconStyle : {}),
                   }}
@@ -87,11 +123,16 @@ const Sidebar = () => {
           </IconsContainer>
         </Column>
         <Column>
-          <Icon>
+          <Icon className={hidden ? HIDDEN_CONTAINER : ""}>
             <IconSvg onClick={handleSettingBtnClick}>
               <FontAwesomeIcon icon={faEllipsis} />
             </IconSvg>
-            <IconText onClick={handleSettingBtnClick}>설정</IconText>
+            <IconText
+              className={hidden ? HIDDEN : ""}
+              onClick={handleSettingBtnClick}
+            >
+              설정
+            </IconText>
           </Icon>
           {showLogout && (
             <LogOutContainer>
@@ -157,6 +198,11 @@ const Icon = styled.div`
   display: flex;
   align-items: center;
   width: 200px;
+  user-select: none;
+
+  &.hidden-container {
+    width: 100%;
+  }
 
   @media ${(props) => props.theme.device.tablet} {
     width: 100%;
@@ -192,6 +238,11 @@ const IconText = styled.div`
   height: 48px;
   line-height: 48px;
   cursor: pointer;
+  position: relative;
+
+  &.hidden {
+    display: none;
+  }
 
   @media ${(props) => props.theme.device.tablet} {
     display: none;

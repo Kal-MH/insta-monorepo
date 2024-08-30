@@ -6,11 +6,10 @@ import { Photo as PhotoGraphqlType } from "@/__generated__/graphql";
 import Photo from "@/pages/home/components/Photo";
 import PageTitle from "@/components/PageTitle";
 import { useSeeFeeds } from "./hooks/useSeeFeeds";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PhotoModal from "./components/PhotoModal";
 import useModal from "@/hooks/useModal";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll";
-// import useInfiniteScroll from "@/hooks/useInfiniteScroll";
 
 const LIMIT = 3;
 

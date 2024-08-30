@@ -7,6 +7,7 @@ import { DeleteCommentResult } from "@/__generated__/graphql";
 import { FatText } from "@/components/shared";
 import { Avatar } from "@insta-monorepo/design-system";
 import { formatTimeDifference } from "@/utils/timeformat";
+import TimeText from "./TimeText";
 
 interface CommentProps {
   id?: Number;
@@ -99,9 +100,7 @@ const Comment = ({
               )}
             </CommentCaption>
           </CommentCaptionContainer>
-          {createdAt && (
-            <CommentTimeText>{formatTimeDifference(createdAt)}</CommentTimeText>
-          )}
+          {createdAt && <TimeText>{formatTimeDifference(createdAt)}</TimeText>}
         </div>
       </CommentContainer>
       {isMine ? (
@@ -151,11 +150,6 @@ const CommentCaption = styled.span`
       text-decoration: underline;
     }
   }
-`;
-
-const CommentTimeText = styled.span`
-  font-size: 10px;
-  color: rgba(0, 0, 0, 0.5);
 `;
 
 const CommentDeleteBtn = styled.button`
