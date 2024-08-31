@@ -150,12 +150,7 @@ const Sidebar = () => {
 export default Sidebar;
 
 const Container = styled.nav`
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-
-  min-width: ${(props) => props.theme.navWidth.min};
+  /* height: 100vh; */
   max-width: ${(props) => props.theme.navWidth.max};
   background-color: ${(props) => props.theme.bgColor};
   border-right: 1px solid ${(props) => props.theme.borderColor};

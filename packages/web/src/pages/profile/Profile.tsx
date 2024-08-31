@@ -191,7 +191,9 @@ const Profile = () => {
               <Row>{data?.seeProfile?.bio}</Row>
             </Column>
           </Header>
-          <GridPhotos photos={data?.seeProfile?.photos} />
+          <PhotoContainer>
+            <GridPhotos photos={data?.seeProfile?.photos} />
+          </PhotoContainer>
         </Container>
       </CommonLayout>
     </LoginLayout>
@@ -208,7 +210,7 @@ const Header = styled.div`
 const Container = styled.div`
   width: 100%;
   max-width: 930px;
-  padding: 0 16px;
+  padding: 45px 16px;
 `;
 
 const ProfileAvatar = styled(Avatar)`
@@ -251,4 +253,8 @@ const ProfileBtn = styled(Button)`
   margin-top: 0px;
   padding: 5px 10px !important;
   cursor: pointer;
+`;
+
+const PhotoContainer = styled.div`
+  padding-bottom: 45px;
 `;

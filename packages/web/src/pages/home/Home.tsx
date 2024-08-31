@@ -10,6 +10,7 @@ import { useState } from "react";
 import PhotoModal from "./components/PhotoModal";
 import useModal from "@/hooks/useModal";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll";
+import styled from "styled-components";
 
 const LIMIT = 3;
 
@@ -41,15 +42,21 @@ const Home = () => {
     <LoginLayout authStatus={authStatusType.NEED_LOGIN}>
       <CommonLayout>
         <PageTitle title="Home" />
-        <ul>
-          {feeds.map((photo: PhotoGraphqlType, idx: number) => (
-            <Photo
-              key={photo.id}
-              photo={photo}
-              onCommentClick={() => handlePhotoClick(idx)}
-            />
-          ))}
-        </ul>
+        <div>
+          <Ul>
+            {feeds.map((photo: PhotoGraphqlType, idx: number) => (
+              <Li key={photo.id}>
+                <Photo
+                  photo={photo}
+                  onCommentClick={() => handlePhotoClick(idx)}
+                />
+              </Li>
+            ))}
+            <li>
+              <div ref={targetRef}></div>
+            </li>
+          </Ul>
+        </div>
         {curPhotoId !== null && (
           <PhotoModal
             photo={data?.seeFeeds[curPhotoId]}
@@ -58,9 +65,16 @@ const Home = () => {
           />
         )}
       </CommonLayout>
-      <div ref={targetRef} />
     </LoginLayout>
   );
 };
 
 export default Home;
+
+const Ul = styled.ul`
+  padding: 45px 0;
+`;
+
+const Li = styled.li`
+  padding-bottom: 60px;
+`;

@@ -54,10 +54,12 @@ const Explore = () => {
               <Button size="large">팔로우</Button>
             </DescriptionContainer>
           </ProfileContainer>
-          <GridPhotos photos={photos} />
+          <PhotoContainer>
+            <GridPhotos photos={photos} />
+            <div ref={targetRef} />
+          </PhotoContainer>
         </Container>
       </CommonLayout>
-      <div ref={targetRef} />
     </LoginLayout>
   );
 };
@@ -67,7 +69,7 @@ export default Explore;
 const Container = styled.div`
   width: 100%;
   max-width: 930px;
-  padding: 0 16px;
+  padding: 45px 16px;
 `;
 
 const ProfileContainer = styled.div`
@@ -90,4 +92,8 @@ const DescriptionContainer = styled.div`
 const Keyword = styled.h3`
   font-size: 28px;
   font-weight: 400;
+`;
+
+const PhotoContainer = styled.div`
+  padding-bottom: 45px;
 `;

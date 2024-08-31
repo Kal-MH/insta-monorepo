@@ -79,7 +79,7 @@ const PhotoContainer = styled.div`
   background-color: white;
   border-radius: 4px;
   border: 1px solid ${(props) => props.theme.borderColor};
-  margin-bottom: 60px;
+  /* margin-bottom: 60px; */
   max-width: 615px;
 `;
 const PhotoHeader = styled.div`

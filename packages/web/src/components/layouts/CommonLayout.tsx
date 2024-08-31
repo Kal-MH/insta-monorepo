@@ -9,25 +9,34 @@ interface LayoutProps {
 function CommonLayout({ children }: LayoutProps) {
   return (
     <>
-      <Content>{children}</Content>
-      <Sidebar />
+      <Container>
+        <Sidebar />
+        <Content>{children}</Content>
+      </Container>
     </>
   );
 }
 
 export default CommonLayout;
 
-const Content = styled.main`
-  /* min-width: 930px; */
-  padding: 0 16px;
+const Container = styled.main`
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: center; */
+  width: 100%;
+  /* height: 100vh; */
+  overflow: hidden;
+`;
 
-  margin: 0 auto;
-  margin-top: 45px;
-  margin-left: ${(props) => props.theme.navWidth.max};
+const Content = styled.div`
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
   display: flex;
   justify-content: center;
 
-  @media ${(props) => props.theme.device.tablet} {
-    margin-left: ${(props) => props.theme.navWidth.min};
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
 `;

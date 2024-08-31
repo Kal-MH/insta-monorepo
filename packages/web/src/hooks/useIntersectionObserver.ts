@@ -16,7 +16,7 @@ const useIntersectionObserver = () => {
 
     observerRef.current = new IntersectionObserver(observerCallback, {
       root: null,
-      rootMargin: "50px",
+      rootMargin: "200px",
       threshold: 0.5,
     });
 

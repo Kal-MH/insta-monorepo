@@ -109,11 +109,6 @@ const RightContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-
-  @media ${(props) => props.theme.device.tablet} {
-    /* min-width: 0;
-    max-width: 300px; */
-  }
 `;
 
 const Header = styled.div`

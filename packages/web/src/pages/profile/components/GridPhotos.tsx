@@ -65,7 +65,7 @@ const Grid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   margin-top: 50px;
-  /* grid-auto-rows: 30vh; */
+  grid-auto-rows: 25vh;
 `;
 
 const PhotoContainer = styled.div<PhotoProps>`
