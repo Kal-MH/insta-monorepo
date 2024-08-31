@@ -10,7 +10,7 @@ export interface AvatarProps {
   alt?: string;
   placeholder?: string;
   shape?: AvatarShapeType;
-  size?: number;
+  size?: number | string;
   className?: string;
   style?: React.CSSProperties;
   mode?: "cover" | "fill" | "contain";

@@ -158,7 +158,7 @@ const Profile = () => {
               src={data?.seeProfile?.avatar}
               alt="profile"
               placeholder="/profile.png"
-              size={160}
+              size="16rem"
             />
             <Column>
               <Row>
@@ -202,6 +202,7 @@ export default Profile;
 
 const Header = styled.div`
   display: flex;
+  padding-left: 5%;
 `;
 
 const Container = styled.div`
@@ -211,10 +212,17 @@ const Container = styled.div`
 `;
 
 const ProfileAvatar = styled(Avatar)`
-  margin-left: 50px;
-  margin-right: 110px;
+  /* margin-left: 50px;
+  margin-right: 110px; */
+  width: 100%;
+  height: 100%;
 `;
-const Column = styled.div``;
+const Column = styled.div`
+  margin-left: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 const Username = styled.h3`
   font-size: 28px;
   font-weight: 400;

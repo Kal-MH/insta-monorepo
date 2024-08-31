@@ -17,6 +17,8 @@ export const PHOTO_PROFILE_FRAGMENT = gql`
     likes
     commentNumber
     isLiked
+    likes
+    caption
     user {
       username
       avatar

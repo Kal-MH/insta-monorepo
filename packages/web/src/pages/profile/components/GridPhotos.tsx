@@ -62,10 +62,10 @@ export default GridPhotos;
 
 const Grid = styled.div`
   display: grid;
-  grid-auto-rows: 290px;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 10px;
   margin-top: 50px;
+  /* grid-auto-rows: 30vh; */
 `;
 
 const PhotoContainer = styled.div<PhotoProps>`
@@ -77,6 +77,8 @@ const PhotoContainer = styled.div<PhotoProps>`
 
 const Icons = styled.div`
   position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;

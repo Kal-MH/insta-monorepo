@@ -9,7 +9,7 @@ import LoginLayout, { authStatusType } from "@/components/layouts/LoginLayout";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll";
 import { useState } from "react";
 
-const LIMIT = 6;
+const LIMIT = 8;
 
 const Explore = () => {
   const [searchParams] = useSearchParams();
@@ -74,10 +74,7 @@ const ProfileContainer = styled.div`
   display: flex;
 `;
 
-const ProfileAvatar = styled(Avatar)`
-  margin-left: 50px;
-  margin-right: 110px;
-`;
+const ProfileAvatar = styled(Avatar)``;
 
 const DescriptionContainer = styled.div`
   flex: 1;
@@ -86,6 +83,8 @@ const DescriptionContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 30px;
+
+  margin-left: 15%;
 `;
 
 const Keyword = styled.h3`

@@ -18,7 +18,7 @@ function CommonLayout({ children }: LayoutProps) {
 export default CommonLayout;
 
 const Content = styled.main`
-  min-width: 930px;
+  /* min-width: 930px; */
   padding: 0 16px;
 
   margin: 0 auto;

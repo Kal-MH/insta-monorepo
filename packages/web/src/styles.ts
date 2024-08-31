@@ -36,16 +36,22 @@ export const darkTheme: DefaultTheme = {
 
 export const GlobalStyles = createGlobalStyle`
     ${reset}
+
+    html {
+      font-size: 62.5%;
+      line-height: 1.15;
+      -webkit-text-size-adjust: 100%; 
+    }
+    body {
+      font-size: 1.4rem;
+      font-family: 'Open Sans', sans-serif;
+      background-color:${(props) => props.theme.bgColor};
+      color:${(props) => props.theme.fontColor};
+    }
+    
     input {
       all: unset;
     }
-    body {
-        font-size: 14px;
-        font-family: 'Open Sans', sans-serif;
-        background-color:${(props) => props.theme.bgColor};
-        color:${(props) => props.theme.fontColor};
-    }
-
     a {
       text-decoration: none;
       color : ${(props) => props.theme.fontColor};
