@@ -120,27 +120,25 @@ const Sidebar = () => {
                 </IconText>
               </Link>
             </Icon>
+            <Icon className={hidden ? HIDDEN_CONTAINER : ""}>
+              <IconSvg onClick={handleSettingBtnClick}>
+                <FontAwesomeIcon icon={faEllipsis} />
+              </IconSvg>
+              <IconText
+                className={hidden ? HIDDEN : ""}
+                onClick={handleSettingBtnClick}
+              >
+                설정
+              </IconText>
+              {showLogout && (
+                <LogOutContainer>
+                  <LogOutButton onClick={handleLogOutBtnClick}>
+                    로그아웃
+                  </LogOutButton>
+                </LogOutContainer>
+              )}
+            </Icon>
           </IconsContainer>
-        </Column>
-        <Column>
-          <Icon className={hidden ? HIDDEN_CONTAINER : ""}>
-            <IconSvg onClick={handleSettingBtnClick}>
-              <FontAwesomeIcon icon={faEllipsis} />
-            </IconSvg>
-            <IconText
-              className={hidden ? HIDDEN : ""}
-              onClick={handleSettingBtnClick}
-            >
-              설정
-            </IconText>
-          </Icon>
-          {showLogout && (
-            <LogOutContainer>
-              <LogOutButton onClick={handleLogOutBtnClick}>
-                로그아웃
-              </LogOutButton>
-            </LogOutContainer>
-          )}
         </Column>
       </Wrapper>
     </Container>
@@ -150,10 +148,16 @@ const Sidebar = () => {
 export default Sidebar;
 
 const Container = styled.nav`
-  /* height: 100vh; */
   max-width: ${(props) => props.theme.navWidth.max};
   background-color: ${(props) => props.theme.bgColor};
   border-right: 1px solid ${(props) => props.theme.borderColor};
+
+  @media ${(props) => props.theme.device.mobile} {
+    max-width: 100%;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid ${(props) => props.theme.borderColor};
+  }
 `;
 
 const Wrapper = styled.div`
@@ -162,22 +166,25 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  position: relative;
+
+  @media ${(props) => props.theme.device.mobile} {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px 10px;
+  }
 `;
 
 const Column = styled.div`
   &:first-of-type {
-    height: 92px;
-
     display: flex;
     align-items: center;
     justify-content: flex-start;
 
     padding-left: 12px;
-  }
-
-  &:last-of-type {
-    position: absolute;
-    bottom: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 `;
 
@@ -187,6 +194,11 @@ const IconsContainer = styled.div`
   align-items: flex-start;
 
   flex-grow: 1;
+
+  @media ${(props) => props.theme.device.mobile} {
+    flex-direction: row;
+    padding-right: 10px;
+  }
 `;
 
 const Icon = styled.div`
@@ -194,6 +206,7 @@ const Icon = styled.div`
   align-items: center;
   width: 200px;
   user-select: none;
+  position: relative;
 
   &.hidden-container {
     width: 100%;
@@ -246,14 +259,18 @@ const IconText = styled.div`
 
 const LogOutContainer = styled.div`
   z-index: 1000;
-  position: fixed;
-  transform: translate(12px, -250%);
+  position: absolute;
+  transform: translate(-5%, 100%);
 
   width: 220px;
   height: 45px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
+  @media ${(props) => props.theme.device.mobile} {
+    transform: translate(-83%, 100%);
+  }
 `;
 
 const LogOutButton = styled(Button)`

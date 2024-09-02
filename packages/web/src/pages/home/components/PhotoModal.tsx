@@ -84,14 +84,27 @@ export default PhotoModal;
 
 const Container = styled.div`
   display: flex;
+  flex-direction: row;
+
+  @media ${(props) => props.theme.device.tablet} {
+    flex-direction: column;
+    max-width: 50rem;
+    max-height: 60rem;
+  }
+
+  @media ${(props) => props.theme.device.mobile} {
+    flex-direction: column;
+    max-width: 40rem;
+    max-height: 50rem;
+  }
 `;
 
 const LeftContainer = styled.div`
   background-color: black;
-  max-height: 755px;
-  max-width: 755px;
+  max-height: 65.5rem;
+  max-width: 65.5rem;
   aspect-ratio: 1 / 1;
-  flex-basis: 755px;
+  flex-basis: 65.5rem;
 
   display: flex;
   flex-direction: column;
@@ -103,8 +116,8 @@ const LeftContainer = styled.div`
   }
 `;
 const RightContainer = styled.div`
-  min-width: 280px;
-  max-height: 755px;
+  min-width: 28rem;
+  max-height: 65.5rem;
   background-color: white;
 
   display: flex;
@@ -163,6 +176,10 @@ const Caption = styled.div`
 const Footer = styled.div`
   width: 100%;
   border-top: 1px solid rgba(0, 0, 0, 0.0975);
+
+  @media ${(props) => props.theme.device.mobile} {
+    display: none;
+  }
 `;
 
 const PhotoActionContainer = styled.div`
@@ -197,5 +214,9 @@ const CommentFormContainer = styled.div`
   div {
     margin-top: 0;
     border: none;
+  }
+
+  @media ${(props) => props.theme.device.tablet} {
+    display: none;
   }
 `;

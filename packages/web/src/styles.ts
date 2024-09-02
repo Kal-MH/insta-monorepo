@@ -47,6 +47,11 @@ export const GlobalStyles = createGlobalStyle`
       font-family: 'Open Sans', sans-serif;
       background-color:${(props) => props.theme.bgColor};
       color:${(props) => props.theme.fontColor};
+      -ms-overflow-style: none;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
     }
     
     input {

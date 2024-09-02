@@ -11,7 +11,7 @@ const NotFound = () => {
   };
   return (
     <Container>
-      <PageTitle title="Login" />
+      <PageTitle title="NotFound" />
       <Title>잘못된 경로입니다!</Title>
       <NavigateBtn onClick={handleNavigateBtnClick}>뒤로가기</NavigateBtn>
     </Container>

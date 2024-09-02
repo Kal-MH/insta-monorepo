@@ -43,12 +43,14 @@ const Explore = () => {
       <CommonLayout>
         <Container>
           <ProfileContainer>
-            <ProfileAvatar
-              src={firstPhoto?.user?.avatar}
-              alt="profile"
-              placeholder="/profile.png"
-              size={160}
-            />
+            <ProfileAvatar>
+              <Avatar
+                src={firstPhoto?.user?.avatar}
+                alt="profile"
+                placeholder="/profile.png"
+                size="clamp(120px, 20vw, 16rem)"
+              />
+            </ProfileAvatar>
             <DescriptionContainer>
               <Keyword>#{keyword}</Keyword>
               <Button size="large">팔로우</Button>
@@ -76,21 +78,28 @@ const ProfileContainer = styled.div`
   display: flex;
 `;
 
-const ProfileAvatar = styled(Avatar)``;
+const ProfileAvatar = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+`;
 
 const DescriptionContainer = styled.div`
-  flex: 1;
+  flex: 2;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 30px;
 
-  margin-left: 15%;
+  @media ${({ theme }) => theme.device.mobile} {
+    flex: 1;
+  }
 `;
 
 const Keyword = styled.h3`
   font-size: 28px;
+  font-size: clamp(2.2rem, 2vw, 2.8rem);
   font-weight: 400;
 `;
 

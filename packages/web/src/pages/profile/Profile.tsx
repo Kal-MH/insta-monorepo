@@ -158,7 +158,7 @@ const Profile = () => {
               src={data?.seeProfile?.avatar}
               alt="profile"
               placeholder="/profile.png"
-              size="16rem"
+              size="clamp(120px, 20vw, 16rem)"
             />
             <Column>
               <Row>
@@ -214,8 +214,6 @@ const Container = styled.div`
 `;
 
 const ProfileAvatar = styled(Avatar)`
-  /* margin-left: 50px;
-  margin-right: 110px; */
   width: 100%;
   height: 100%;
 `;
@@ -226,12 +224,12 @@ const Column = styled.div`
   justify-content: center;
 `;
 const Username = styled.h3`
-  font-size: 28px;
+  font-size: clamp(2.2rem, 2vw, 2.8rem);
   font-weight: 400;
 `;
 const Row = styled.div`
   margin-bottom: 20px;
-  font-size: 16px;
+  font-size: clamp(1.2rem, 1.5vw, 1.6rem);
   display: flex;
   align-items: center;
 `;
@@ -242,10 +240,10 @@ const Item = styled.li`
   margin-right: 20px;
 `;
 const Value = styled(FatText)`
-  font-size: 18px;
+  font-size: clamp(1.4rem, 1.6vw, 1.8rem);
 `;
 const Name = styled(FatText)`
-  font-size: 20px;
+  font-size: clamp(1.4rem, 1.6vw, 2rem);
 `;
 
 const ProfileBtn = styled(Button)`

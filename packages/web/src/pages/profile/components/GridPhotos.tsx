@@ -65,7 +65,16 @@ const Grid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   margin-top: 50px;
-  grid-auto-rows: 25vh;
+  grid-auto-rows: 29rem;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    grid-auto-rows: 29vw;
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 40vw;
+  }
 `;
 
 const PhotoContainer = styled.div<PhotoProps>`

@@ -94,11 +94,19 @@ const SearchContainer = styled.form`
   position: absolute;
   transform: translate(80px, 0);
 
+  @media ${(props) => props.theme.device.mobile} {
+    transform: translate(-85%, 100%);
+  }
+
   transition: transform 0.5s ease-in-out;
 
   &.hidden {
     transform: translate(-200%, 0);
     visibility: hidden;
+
+    @media ${(props) => props.theme.device.mobile} {
+      transform: translate(-85%, -100%);
+    }
   }
 
   div {
