@@ -9,7 +9,6 @@ import {
   User as UserGraphqlProps,
 } from "@/__generated__/graphql";
 import { Button, Avatar } from "@insta-monorepo/design-system";
-import useUser from "@/hooks/useUser";
 import PageTitle from "@/components/PageTitle";
 import { FatText } from "@/components/shared";
 import { useSeeProfile } from "./hooks/useSeeProfile";
@@ -17,10 +16,11 @@ import { useFollowUser } from "./hooks/useFollowUser";
 import { useUnFollowUser } from "./hooks/useUnFollowUser";
 import toast from "react-hot-toast";
 import GridPhotos from "./components/GridPhotos";
+import { useUserStore } from "@/store/user";
 
 const Profile = () => {
   const { username } = useParams();
-  const userData = useUser();
+  const { user } = useUserStore();
   const client = useApolloClient();
   const { data, loading } = useSeeProfile({
     variables: {
@@ -55,7 +55,7 @@ const Profile = () => {
     });
 
     //나의 팔로잉 리스트에서 제거
-    const { me } = userData;
+    const { me } = user;
 
     cache.modify({
       id: `User:${me.username}`,
@@ -88,7 +88,7 @@ const Profile = () => {
     });
 
     //나의 팔로잉 리스트에 추가
-    const { me } = userData;
+    const { me } = user;
     cache.modify({
       id: `User:${me.username}`,
       fields: {

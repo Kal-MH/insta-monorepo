@@ -4,9 +4,9 @@ import { CreateCommentResult } from "@/__generated__/graphql";
 import { Button, TextArea } from "@insta-monorepo/design-system";
 
 import { ApolloCache, gql, useMutation } from "@apollo/client";
-import { set, SubmitHandler, useForm } from "react-hook-form";
-import useUser from "@/hooks/useUser";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { ChangeEvent, useState } from "react";
+import { useUserStore } from "@/store/user";
 
 const CREATE_COMMENT_MUTATION = gql`
   mutation createComment($photoId: Int!, $payload: String!) {
@@ -27,7 +27,7 @@ interface FormProps {
 }
 
 const CommentForm = ({ photoId }: CommentFormProps) => {
-  const userData = useUser();
+  const { user } = useUserStore();
   const [show, setShow] = useState(false);
   const { register, handleSubmit, setValue, getValues } = useForm<FormProps>();
   const { onChange, ...rest } = register("payload", { required: true });
@@ -49,7 +49,7 @@ const CommentForm = ({ photoId }: CommentFormProps) => {
         createComment: { ok, id },
       },
     } = result;
-    if (!ok || !userData?.me) return;
+    if (!ok || !user?.me) return;
 
     const newComment = {
       __typename: "Comment",
@@ -58,7 +58,7 @@ const CommentForm = ({ photoId }: CommentFormProps) => {
       isMine: true,
       payload,
       user: {
-        ...userData.me,
+        ...user.me,
       },
     };
 
@@ -141,15 +141,7 @@ export default CommentForm;
 const PostCommentContainer = styled.div`
   margin-top: 10px;
   padding-top: 15px;
-  /* padding-bottom: 10px; */
   border-top: 1px solid ${(props) => props.theme.borderColor};
-`;
-
-const PostCommentInput = styled.input`
-  width: 100%;
-  &::placeholder {
-    font-size: 12px;
-  }
 `;
 
 const PostCommentForm = styled.form`

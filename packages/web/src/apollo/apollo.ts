@@ -1,3 +1,4 @@
+import { TOKEN } from "@/store/user";
 import {
   ApolloClient,
   ApolloLink,
@@ -6,24 +7,10 @@ import {
   InMemoryCache,
   makeVar,
 } from "@apollo/client";
+import Cookies from "js-cookie";
 
-const TOKEN = "TOKEN";
 const DARK_MODE = "DARK_MODE";
-
-export const isLoggedInVar = makeVar(Boolean(localStorage.getItem(TOKEN)));
 export const darkModeVar = makeVar(Boolean(localStorage.getItem(DARK_MODE)));
-
-export const logUserIn = (token: string) => {
-  localStorage.setItem(TOKEN, token);
-  isLoggedInVar(true);
-  window.location.reload();
-};
-
-export const logUserOut = () => {
-  localStorage.removeItem(TOKEN);
-  isLoggedInVar(false);
-  window.location.reload();
-};
 
 export const enableDarkMode = () => {
   localStorage.setItem(DARK_MODE, "enabled");
@@ -43,7 +30,7 @@ const authLink = new ApolloLink((operation, forward) => {
   operation.setContext((context: DefaultContext) => ({
     headers: {
       ...context.headers,
-      token: localStorage.getItem(TOKEN),
+      token: Cookies.get(TOKEN),
     },
   }));
   return forward(operation);

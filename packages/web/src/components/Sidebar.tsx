@@ -10,11 +10,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Avatar, Button } from "@insta-monorepo/design-system";
 import { pageRoutes } from "@/apiRoutes";
-import useUser from "@/hooks/useUser";
 import { useState } from "react";
-import { logUserOut } from "@/apollo/apollo";
 import { useForm } from "react-hook-form";
 import SearchInput from "./SearchInput";
+import { TOKEN, useUserStore } from "@/store/user";
+import Cookies from "js-cookie";
+import useMe from "./hooks/useMe";
 
 interface FormProps {
   keyword: string;
@@ -25,8 +26,9 @@ const HIDDEN_CONTAINER = "hidden-container";
 
 const Sidebar = () => {
   const { username, explore } = useParams();
+  const { setIsLoggedIn } = useUserStore();
   const navigate = useNavigate();
-  const data = useUser();
+  const data = useMe();
   const [showLogout, setShowLogout] = useState(false);
   const [hidden, setHidden] = useState(false);
   const { register, handleSubmit } = useForm<FormProps>({
@@ -43,7 +45,8 @@ const Sidebar = () => {
   };
 
   const handleLogOutBtnClick = () => {
-    logUserOut();
+    Cookies.remove(TOKEN);
+    setIsLoggedIn(false);
   };
 
   const handleSearchBtnClick = () => {

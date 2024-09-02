@@ -54,10 +54,12 @@ const PhotoModal = ({ photo, isModalOpened, onClose }: PhotoModalProps) => {
                   payload={photo.caption || ""}
                 />
               </Caption>
-              <Comments
-                photoId={photo.id}
-                comments={(photo.comments as CommentGraphqlType[]) || []}
-              />
+              <CommentsContainer>
+                <Comments
+                  photoId={photo.id}
+                  comments={(photo.comments as CommentGraphqlType[]) || []}
+                />
+              </CommentsContainer>
             </Content>
             <Footer>
               <PhotoActionContainer>
@@ -171,6 +173,12 @@ const Caption = styled.div`
   line-height: 1;
   margin-bottom: 30px;
   white-space: pre-line;
+`;
+
+const CommentsContainer = styled.div`
+  @media ${(props) => props.theme.device.tablet} {
+    display: none;
+  }
 `;
 
 const Footer = styled.div`

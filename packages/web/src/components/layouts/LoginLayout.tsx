@@ -1,9 +1,8 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { pageRoutes } from "../../apiRoutes";
-import { isLoggedInVar } from "../../apollo/apollo";
 
-import { useReactiveVar } from "@apollo/client";
+import { useUserStore } from "@/store/user";
 
 export const authStatusType = {
   NEED_LOGIN: "NEED_LOGIN",
@@ -20,7 +19,7 @@ const LoginLayout = ({
   children,
   authStatus = authStatusType.COMMON,
 }: LayoutProps) => {
-  const isLoggedIn = useReactiveVar(isLoggedInVar);
+  const { isLoggedIn } = useUserStore();
 
   if (authStatus === authStatusType.NEED_LOGIN && !isLoggedIn) {
     return <Navigate to={pageRoutes.login} />;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Cookies from "js-cookie";
 import {
   faFacebookSquare,
   faInstagram,
@@ -15,11 +16,11 @@ import { pageRoutes } from "@/apiRoutes";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormError from "@/pages/auth/components/FormError";
 import { LoginResult } from "@/__generated__/graphql";
-import { logUserIn } from "@/apollo/apollo";
 import LoginLayout, { authStatusType } from "@/components/layouts/LoginLayout";
 import { useLocation } from "react-router-dom";
 import PageTitle from "@/components/PageTitle";
 import { useLogin } from "./hooks/useLogin";
+import { TOKEN, useUserStore } from "@/store/user";
 
 interface FormProps {
   username: string;
@@ -33,6 +34,7 @@ interface LoginMutationResult {
 
 const Login = () => {
   const location = useLocation();
+  const { setIsLoggedIn } = useUserStore();
 
   const {
     register,
@@ -72,7 +74,8 @@ const Login = () => {
     }
 
     if (token) {
-      logUserIn(token);
+      Cookies.set(TOKEN, token);
+      setIsLoggedIn(true);
     }
   };
 
