@@ -5,19 +5,19 @@ import { ConfigContext } from "../utils/config";
 interface ModalContentProps {
   children: React.ReactNode;
   className?: string;
-  footerStyle?: React.CSSProperties;
+  contentStyle?: React.CSSProperties;
 }
 
 const ModalContent = ({
   children,
   className,
-  footerStyle,
+  contentStyle,
 }: ModalContentProps) => {
   const { prefix } = ConfigContext;
   const classPrefix = `${prefix}-modal--content`;
   const classNames = classnames(classPrefix, className);
   return (
-    <div className={classNames} style={{ ...footerStyle }}>
+    <div className={classNames} style={{ ...contentStyle }}>
       {children}
     </div>
   );

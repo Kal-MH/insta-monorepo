@@ -23,7 +23,7 @@ export const disableDarkMode = () => {
 };
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000/graphql",
+  uri: import.meta.env.VITE_SERVER_DOMAIN_URL,
 });
 
 const authLink = new ApolloLink((operation, forward) => {

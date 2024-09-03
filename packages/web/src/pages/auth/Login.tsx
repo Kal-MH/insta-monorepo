@@ -21,6 +21,8 @@ import { useLocation } from "react-router-dom";
 import PageTitle from "@/components/PageTitle";
 import { useLogin } from "./hooks/useLogin";
 import { TOKEN, useUserStore } from "@/store/user";
+import useModal from "@/hooks/useModal";
+import AvailableUser from "./components/AvailableUser";
 
 interface FormProps {
   username: string;
@@ -40,6 +42,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    setValue,
     setError,
     clearErrors,
   } = useForm<FormProps>({
@@ -49,6 +52,12 @@ const Login = () => {
       password: location?.state?.password || "",
     },
   });
+
+  const { isModalOpened, toggleIsModalOpened } = useModal();
+  const handleAvailableUserClick = (username: string, password: string) => {
+    setValue("username", username, { shouldValidate: true });
+    setValue("password", password, { shouldValidate: true });
+  };
 
   const { onChange: unOnChange, ...unRest } = register("username", {
     required: "Username is required",
@@ -143,6 +152,16 @@ const Login = () => {
           linkText="Sign up"
           link={pageRoutes.signup}
         />
+        <AvailableUserContainer>
+          <button onClick={() => toggleIsModalOpened()}>AvailableUser</button>
+          {isModalOpened && (
+            <AvailableUser
+              isModalOpened={isModalOpened}
+              onClose={toggleIsModalOpened}
+              onClick={handleAvailableUserClick}
+            />
+          )}
+        </AvailableUserContainer>
       </AuthLayout>
     </LoginLayout>
   );
@@ -164,4 +183,22 @@ const Notification = styled.div`
 
 const LoginButton = styled(Button)`
   margin-top: 12px;
+`;
+
+const AvailableUserContainer = styled.div`
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+
+  button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    color: ${(props) => props.theme.accent};
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
