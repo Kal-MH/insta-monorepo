@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import { pageRoutes } from "./apiRoutes";
-import Error from "@/components/Error";
+import Error from "@/components/error/Error";
 import Home from "@/pages/home/Home";
 import Login from "@/pages/auth/Login";
-import NotFound from "@/pages/NotFound";
+import NotFound from "@/components/error/NotFound";
 import Profile from "@/pages/profile/Profile";
 import SignUp from "@/pages/auth/SignUp";
 import Explore from "./pages/explore/Explore";

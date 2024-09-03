@@ -17,6 +17,9 @@ const useMe = () => {
 
   const { data } = useQuery(ME_QUERY, {
     skip: !isLoggedIn,
+    onCompleted: (data) => {
+      setUser(data);
+    },
   });
 
   useEffect(() => {
@@ -26,7 +29,6 @@ const useMe = () => {
     }
   }, [data]);
 
-  setUser(data?.me);
   return data;
 };
 

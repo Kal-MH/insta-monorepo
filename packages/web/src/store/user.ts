@@ -13,10 +13,11 @@ export const userVar = makeVar({} as UserType);
 
 export const useUserStore = () => {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
+  const user = useReactiveVar(userVar);
 
   return {
     isLoggedIn,
-    user: {} as UserType,
+    user,
     setIsLoggedIn: (isLoggedIn: boolean) => {
       isLoggedInVar(isLoggedIn);
     },

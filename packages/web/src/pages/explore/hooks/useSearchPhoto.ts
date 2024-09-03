@@ -9,6 +9,8 @@ export const SEARCH_PHOTO_QUERY = gql`
       user {
         username
         avatar
+        isMe
+        isFollowing
       }
       caption
       likes
