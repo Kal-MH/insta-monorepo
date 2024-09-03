@@ -1,50 +1,111 @@
-# React + TypeScript + Vite
+### 기능
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+instagram을 모방하여 간단한 SNS 기능의 웹 서비스를 제공합니다.
 
-Currently, two official plugins are available:
+1. 로그인, 회원가입
+   1. 사용자는 계정을 생성할 수 있습니다
+   2. 생성한 계정으로 사용자는 로그인할 수 있습니다.
+2. 피드 확인하기
+   1. 사용자는 팔로잉하는 사람의 게시물 혹은 자신이 올린 게시글의 피드를 확인할 수 있습니다.
+   2. 각각의 게시글에서 좋아요를 남길 수 있고, 각 게시글에 한 개의 좋아요만 남길 수 있습니다.
+   3. 사용자는 게시글에 댓글을 남길 수 있고, 삭제가 가능합니다.
+   4. 사용자가 남긴 게시글의 태그를 타고, 다른 게시글 검색 결과를 확인할 수 있습니다
+3. 프로필 확인하기
+   1. 사용자는 다른 사람의 프로필 및 올린 게시글 목록을 프로필 페이지에서 확인이 가능합니다.
+   2. 해당 프로필 사용자를 팔로우 혹은 팔로우 취소를 할 수 있습니다.
+4. 게시글 검색하기
+   1. 사이드바에 검색 기능을 통해서 게시글을 검색할 수 있습니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+제공하는 페이지는 다음과 같습니다.
 
-## Expanding the ESLint configuration
+- `/` : 홈(피드)
+- `/login` , `/sign-up` : 로그인, 회원가입
+- `/users/:username` : 프로필 페이지
+- `/explore` : 검색 페이지
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### web service 실행 방법
 
-- Configure the top-level `parserOptions` property like this:
+monorepo 환경으로 가장 바깥 레포지토리에 각 service에 대한 script가 정의되어 있습니다.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
+```jsx
+ "scripts": {
+    "design-system": "yarn workspace @insta-monorepo/design-system",
+    "web": "yarn workspace @insta-monorepo/web",
+    ...
   },
-})
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. 모든 패키지 설치
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+   ```jsx
+   yarn web install
+   ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+2. env 파일 web 레포지토리 안에 작성
+
+   ```jsx
+   // /web/.env
+
+   VITE_SERVER_DOMAIN_URL = YOUR_SERVER_DOMAIN_URL;
+   ```
+
+3. 실행
+
+   ```jsx
+   yarn web run dev
+   ```
+
+### 기술 스택
+
+```
+"react": "^18.3.1",
+"typescript": "^5.5.3",
+"react-router-dom": "^6.26.1",
+"react-hook-form": "^7.52.2",
+"@apollo/client": "^3.11.4",
+"graphql": "^16.9.0",
+"styled-components": "^6.1.12",
+"vite": "^5.4.1",
+```
+
+### 파일 구조
+
+```jsx
+|- pages
+		|- home
+				|- components
+				|- hooks //해당 페이지 Network요청
+				|- tests
+				|- Home.tsx
+	...
+|- components
+		|- Avatar.tsx
+		|- Header.tsx
+		...
+|- layouts
+			|- CommonLayouts.tsx
+			...
+|- __generated__
+		|- graphql.tsx
+|- apollo
+		|- apollo.ts
+		|- fragments.ts
+		|- query
+				|- user.ts //fragment를 합쳐도 될 듯
+				|- photo.ts
+				|- comment.ts
+|- helpers
+		|- useQuery.ts
+		|- useMutation.ts
+		|- useLoadMore.ts
+|- utils
+		|- test
+				|- setUpTests.js
+				|- render.js
+		|- localStorage.ts
+|- apiRoutes.ts
+|- router.tsx
+|- styles.ts
+|- styled.d.ts
+|- main.tsx
 ```
