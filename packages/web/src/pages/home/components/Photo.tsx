@@ -79,7 +79,7 @@ const PhotoContainer = styled.div`
   background-color: white;
   border-radius: 4px;
   border: 1px solid ${(props) => props.theme.borderColor};
-  max-width: 550px;
+  max-width: 500px;
 `;
 const PhotoHeader = styled.div`
   padding: 15px;
@@ -93,8 +93,7 @@ const Username = styled(FatText)`
 `;
 
 const PhotoFile = styled.div`
-  max-width: 550px;
-  max-height: 855px;
+  max-width: 500px;
   aspect-ratio: 1 / 1;
 
   img {

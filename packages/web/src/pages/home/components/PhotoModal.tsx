@@ -116,6 +116,15 @@ const LeftContainer = styled.div`
     height: 100%;
     object-fit: contain;
   }
+
+  @media ${(props) => props.theme.device.tablet} {
+    max-width: 50rem;
+    max-height: 40rem;
+  }
+
+  @media ${(props) => props.theme.device.mobile} {
+    max-height: 35rem;
+  }
 `;
 const RightContainer = styled.div`
   min-width: 28rem;
@@ -124,6 +133,14 @@ const RightContainer = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  @media ${(props) => props.theme.device.tablet} {
+    max-height: 20rem;
+  }
+
+  @media ${(props) => props.theme.device.mobile} {
+    max-height: 15rem;
+  }
 `;
 
 const Header = styled.div`
