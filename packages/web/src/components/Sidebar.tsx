@@ -47,6 +47,7 @@ const Sidebar = () => {
   const handleLogOutBtnClick = () => {
     Cookies.remove(TOKEN);
     setIsLoggedIn(false);
+    window.location.reload();
   };
 
   const handleSearchBtnClick = () => {

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { BaseBox } from "@insta-monorepo/design-system";
 
 interface FormBoxProps {
   children: React.ReactNode;
@@ -10,7 +9,8 @@ const FormBox = ({ children }: FormBoxProps) => {
 };
 export default FormBox;
 
-const Container = styled(BaseBox)`
+const Container = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +18,7 @@ const Container = styled(BaseBox)`
   padding: 35px 40px 25px 40px;
   margin-bottom: 10px;
   box-sizing: border-box;
-  /* border: 1px solid ${(props) => props.theme.borderColor}; */
+  border: 1px solid ${(props) => props.theme.borderColor};
   background-color: ${(props) => props.theme.bgColor};
 
   form {

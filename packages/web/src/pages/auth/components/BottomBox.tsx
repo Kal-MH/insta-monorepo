@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { BaseBox } from "@insta-monorepo/design-system";
 
 interface BottomBox {
   cta: string;
@@ -26,10 +25,11 @@ BottomBox.propTypes = {
 
 export default BottomBox;
 
-const SBottomBox = styled(BaseBox)`
+const SBottomBox = styled.div`
+  width: 100%;
   padding: 20px 0px;
   text-align: center;
-  /* border: 1px solid ${(props) => props.theme.borderColor}; */
+  border: 1px solid ${(props) => props.theme.borderColor};
   background-color: ${(props) => props.theme.bgColor};
   a {
     font-weight: 600;
