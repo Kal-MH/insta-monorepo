@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import { useSearchPhoto } from "../hooks/useSearchPhoto";
 import GridPhotos from "@/pages/profile/components/GridPhotos";
 import { Avatar } from "@insta-monorepo/design-system";
@@ -22,7 +22,6 @@ const PhotoList = ({ keyword }: PhotoListProps) => {
   });
 
   const firstPhoto = data?.searchPhoto[0];
-  const [photos, setPhotos] = useState(data?.searchPhoto || []);
 
   const [_, startTransition] = useTransition();
 
@@ -30,11 +29,16 @@ const PhotoList = ({ keyword }: PhotoListProps) => {
     startTransition(() => {
       fetchMore({
         variables: {
-          lastId: photos[photos.length - 1]?.id,
+          lastId: data?.searchPhoto[data?.searchPhoto.length - 1]?.id,
           limit: LIMIT,
         },
+        updateQuery: (prev, { fetchMoreResult }) => {
+          if (!fetchMoreResult) return prev;
+          return {
+            searchPhoto: [...prev.searchPhoto, ...fetchMoreResult.searchPhoto],
+          };
+        },
       }).then((nextData) => {
-        setPhotos([...photos, ...nextData.data?.searchPhoto]);
         if (nextData.data?.searchPhoto.length < LIMIT) {
           setLoadFinished(true);
         }
@@ -66,7 +70,7 @@ const PhotoList = ({ keyword }: PhotoListProps) => {
         </DescriptionContainer>
       </ProfileContainer>
       <PhotoContainer>
-        <GridPhotos photos={photos} />
+        <GridPhotos photos={data?.searchPhoto} />
         <div ref={targetRef} />
       </PhotoContainer>
     </Container>

@@ -119,11 +119,11 @@ const LeftContainer = styled.div`
 
   @media ${(props) => props.theme.device.tablet} {
     max-width: 50rem;
-    max-height: 40rem;
+    max-height: 35rem;
   }
 
   @media ${(props) => props.theme.device.mobile} {
-    max-height: 35rem;
+    max-height: 30rem;
   }
 `;
 const RightContainer = styled.div`
@@ -135,11 +135,11 @@ const RightContainer = styled.div`
   flex-direction: column;
 
   @media ${(props) => props.theme.device.tablet} {
-    max-height: 20rem;
+    max-height: 25rem;
   }
 
   @media ${(props) => props.theme.device.mobile} {
-    max-height: 15rem;
+    max-height: 20rem;
   }
 `;
 

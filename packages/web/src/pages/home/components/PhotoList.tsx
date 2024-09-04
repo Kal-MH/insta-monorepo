@@ -11,7 +11,6 @@ const LIMIT = 3;
 
 const PhotoList = () => {
   const { data, fetchMore } = useSeeFeeds({ variables: { limit: LIMIT } });
-  const [feeds, setFeeds] = useState<PhotoGraphqlType[]>(data?.seeFeeds || []);
   const [curPhotoId, setCurPhotoId] = useState<number | null>(null);
   const { isModalOpened, toggleIsModalOpened } = useModal(false);
   const handlePhotoClick = (photoId: number) => {
@@ -25,11 +24,16 @@ const PhotoList = () => {
     startTransition(() => {
       fetchMore({
         variables: {
-          lastId: feeds[feeds.length - 1]?.id,
+          lastId: data?.seeFeeds[data?.seeFeeds.length - 1]?.id,
           limit: LIMIT,
         },
+        updateQuery: (prev, { fetchMoreResult }) => {
+          if (!fetchMoreResult) return prev;
+          return {
+            seeFeeds: [...prev.seeFeeds, ...fetchMoreResult.seeFeeds],
+          };
+        },
       }).then((nextData) => {
-        setFeeds([...feeds, ...nextData.data?.seeFeeds]);
         if (nextData.data?.seeFeeds.length < LIMIT) {
           setLoadFinished(true);
         }
@@ -37,13 +41,15 @@ const PhotoList = () => {
     });
   };
 
+  console.log(data);
+
   const { targetRef, setLoadFinished } = useInfiniteScroll(refetchHandler);
 
   return (
     <>
       <div>
         <Ul>
-          {feeds.map((photo: PhotoGraphqlType, idx: number) => (
+          {data?.seeFeeds.map((photo: PhotoGraphqlType, idx: number) => (
             <Li key={photo.id}>
               <Photo
                 photo={photo}
