@@ -1,11 +1,11 @@
 import React, { ReactNode } from "react";
-import styled from "styled-components";
 
 interface SBaseBoxProps {
   children: ReactNode;
   backgroundColor?: string;
   border?: string;
   width?: string;
+  style?: React.CSSProperties;
 }
 
 const BaseBox = ({
@@ -13,24 +13,20 @@ const BaseBox = ({
   backgroundColor,
   border,
   width,
+  style,
   ...props
 }: SBaseBoxProps) => {
+  const styleObj = {
+    backgroundColor: backgroundColor || "white",
+    border: border || "1px solid black",
+    width: width || "100%",
+  };
+
   return (
-    <SBaseBox
-      backgroundColor={backgroundColor}
-      border={border}
-      width={width}
-      {...props}
-    >
+    <div style={{ ...styleObj, ...style }} {...props}>
       {children}
-    </SBaseBox>
+    </div>
   );
 };
 
 export default BaseBox;
-
-const SBaseBox = styled.div<SBaseBoxProps>`
-  background-color: ${(props) => props.backgroundColor || "white"};
-  border: ${(props) => props.border || "1px solid black"};
-  width: ${(props) => props.width || "100%"};
-`;

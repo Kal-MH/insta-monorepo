@@ -10,8 +10,7 @@
     "@types/react-native": "*",
     "react": "18.x",
     "react-dom": "18.x",
-    "react-native": "*",
-    "styled-components": "*"
+    "react-native": "*"
   },
   "dependencies": {
     "classnames": "^2.5.1",
