@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { ConfigContext } from "../utils/config";
 import classnames from "classnames";
@@ -34,9 +34,6 @@ const Modal = ({
     zIndex: 1000,
   };
 
-  const handleClick = () => {
-    console.log("click target");
-  };
   const handleOutsideClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
     if (
       targetRef.current &&
@@ -51,7 +48,6 @@ const Modal = ({
     ref: targetRef,
     onClick: (e: any) => {
       e.stopPropagation();
-      // handleClick();
     },
   });
 

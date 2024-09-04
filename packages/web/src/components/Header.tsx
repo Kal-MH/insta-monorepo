@@ -1,7 +1,4 @@
 import { pageRoutes } from "@/apiRoutes";
-import { isLoggedInVar } from "@/apollo/apollo";
-import useUser from "@/hooks/useUser";
-import { useReactiveVar } from "@apollo/client";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faCompass } from "@fortawesome/free-regular-svg-icons";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
@@ -9,10 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Avatar } from "@insta-monorepo/design-system";
+import { useUserStore } from "@/store/user";
 
 function Header() {
-  const isLoggedIn = useReactiveVar(isLoggedInVar);
-  const data = useUser();
+  const { isLoggedIn, user } = useUserStore();
 
   return (
     <SHeader>
@@ -33,9 +30,9 @@ function Header() {
                   <FontAwesomeIcon icon={faCompass} size="lg" />
                 </Icon>
                 <Icon>
-                  <Link to={`/users/${data?.me?.username}`}>
+                  <Link to={`/users/${user?.me?.username}`}>
                     <Avatar
-                      src={data?.me?.avatar}
+                      src={user?.me?.avatar as string}
                       alt="me"
                       placeholder="/profile.png"
                     />

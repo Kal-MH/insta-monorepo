@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import { Button } from "@insta-monorepo/design-system";
-import {
-  MutationResponse,
-  UnfollowUserResult,
-  User as UserGraphqlProps,
-} from "@/__generated__/graphql";
+import { MutationResponse, UnfollowUserResult } from "@/__generated__/graphql";
 import { ApolloCache } from "@apollo/client";
 import toast from "react-hot-toast";
 import { client } from "@/apollo/apollo";

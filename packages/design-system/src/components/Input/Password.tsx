@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 import Input, { InputProps } from "./Input";
 
 import { ConfigContext } from "../utils/config";

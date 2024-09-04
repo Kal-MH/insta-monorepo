@@ -28,9 +28,6 @@ const Comments = ({ photoId, comments }: CommentsProps) => {
 };
 
 Comments.propTypes = {
-  // author: PropTypes.string.isRequired,
-  // caption: PropTypes.string,
-  // commentNumber: PropTypes.number.isRequired,
   comments: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -47,13 +44,4 @@ Comments.propTypes = {
 
 export default Comments;
 
-const CommentsContainer = styled.div`
-  /* margin-top: 20px; */
-`;
-const CommentCount = styled.span`
-  opacity: 0.7;
-  margin: 10px 0px;
-  display: block;
-  font-weight: 600;
-  font-size: 10px;
-`;
+const CommentsContainer = styled.div``;

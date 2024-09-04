@@ -1,5 +1,3 @@
-import React from "react";
-
 interface CloseBtnProps {
   width: number | string;
   height: number | string;

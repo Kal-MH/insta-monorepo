@@ -16,7 +16,6 @@ interface ApiErrorBoundaryProps {
 }
 
 const ApiFallbackComponent = ({
-  error,
   resetErrorBoundary,
 }: ApiFallbackComponentProps) => {
   return (

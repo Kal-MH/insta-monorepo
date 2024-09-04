@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, { forwardRef, useState } from "react";
 
 import "./TextArea.styles.scss";
 import { ConfigContext } from "../utils/config";
@@ -76,7 +76,6 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     ref
   ) => {
     const [focused, setFocused] = useState(false);
-    const [resizeStyle, setResizeStyle] = useState<React.CSSProperties>({});
 
     const classPrefix = `${prefix}-textarea`;
     const textareaClassNames = classnames(classPrefix, textareaClassName, {

@@ -1,10 +1,8 @@
 import {
   DocumentNode,
-  QueryHookOptions,
   SuspenseQueryHookOptions,
   TypedDocumentNode,
   useMutation,
-  useQuery,
   useSuspenseQuery,
 } from "@apollo/client";
 import toast from "react-hot-toast";
