@@ -128,7 +128,7 @@ const RightContainer = styled.div`
 
 const Header = styled.div`
   width: 100%;
-  height: 60px;
+  min-height: 60px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
 
   padding: 0 15px;

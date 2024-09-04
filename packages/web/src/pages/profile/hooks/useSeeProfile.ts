@@ -1,8 +1,35 @@
+import { Photo } from "@/__generated__/graphql";
 import { useGenericQuery } from "@/apollo/fetcher";
 import { COMMENT_FRAGMENT, PHOTO_PROFILE_FRAGMENT } from "@/apollo/fragments";
-import { gql, QueryHookOptions } from "@apollo/client";
+import {
+  gql,
+  SuspenseQueryHookOptions,
+  TypedDocumentNode,
+} from "@apollo/client";
 
-export const SEE_PROFILE_QUERY = gql`
+interface DataProps {
+  seeProfile: {
+    firstName: string;
+    lastName: string;
+    username: string;
+    bio: string;
+    avatar: string;
+    photos: Photo[];
+    totalFollowing: number;
+    totalFollowers: number;
+    isMe: boolean;
+    isFollowing: boolean;
+  };
+}
+
+interface VariablesProps {
+  username: string;
+}
+
+export const SEE_PROFILE_QUERY: TypedDocumentNode<
+  DataProps,
+  VariablesProps
+> = gql`
   query seeProfile($username: String!) {
     seeProfile(username: $username) {
       firstName
@@ -26,6 +53,6 @@ export const SEE_PROFILE_QUERY = gql`
   ${COMMENT_FRAGMENT}
 `;
 
-export const useSeeProfile = (options?: QueryHookOptions) => {
+export const useSeeProfile = (options?: SuspenseQueryHookOptions) => {
   return useGenericQuery(SEE_PROFILE_QUERY, { ...options });
 };

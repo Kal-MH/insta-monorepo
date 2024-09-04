@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useSearchPhoto } from "../hooks/useSearchPhoto";
 import GridPhotos from "@/pages/profile/components/GridPhotos";
 import { Avatar } from "@insta-monorepo/design-system";
@@ -23,19 +23,25 @@ const PhotoList = ({ keyword }: PhotoListProps) => {
 
   const firstPhoto = data?.searchPhoto[0];
   const [photos, setPhotos] = useState(data?.searchPhoto || []);
-  const { targetRef, setLoadFinished } = useInfiniteScroll(async () => {
-    const nextData = await fetchMore({
-      variables: {
-        lastId: photos[photos.length - 1]?.id,
-        limit: LIMIT,
-      },
-    });
 
-    setPhotos([...photos, ...nextData.data?.searchPhoto]);
-    if (nextData.data?.searchPhoto.length < LIMIT) {
-      setLoadFinished(true);
-    }
-  });
+  const [_, startTransition] = useTransition();
+
+  const refetchHandler = async () => {
+    startTransition(() => {
+      fetchMore({
+        variables: {
+          lastId: photos[photos.length - 1]?.id,
+          limit: LIMIT,
+        },
+      }).then((nextData) => {
+        setPhotos([...photos, ...nextData.data?.searchPhoto]);
+        if (nextData.data?.searchPhoto.length < LIMIT) {
+          setLoadFinished(true);
+        }
+      });
+    });
+  };
+  const { targetRef, setLoadFinished } = useInfiniteScroll(refetchHandler);
 
   return (
     <Container>
@@ -90,6 +96,11 @@ const DescriptionContainer = styled.div`
 
   @media ${({ theme }) => theme.device.mobile} {
     flex: 1;
+  }
+
+  button {
+    height: 3rem;
+    margin-left: 0;
   }
 `;
 

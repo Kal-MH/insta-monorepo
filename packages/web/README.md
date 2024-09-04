@@ -38,7 +38,7 @@ monorepo 환경으로 가장 바깥 레포지토리에 각 service에 대한 scr
 1. 모든 패키지 설치
 
    ```jsx
-   yarn web install
+   yarn web
    ```
 
 2. env 파일 web 레포지토리 안에 작성

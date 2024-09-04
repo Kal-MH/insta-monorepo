@@ -4,6 +4,7 @@ import { ConfigContext } from "../utils/config";
 import classnames from "classnames";
 
 import "./Modal.styles.scss";
+import CloseBtn from "./CloseBtn";
 
 interface ModalProps {
   children: React.ReactNode;
@@ -78,7 +79,7 @@ const Modal = ({
     >
       {onClose && (
         <button className={`${classPrefix}-close-btn`} onClick={onClose}>
-          ❌
+          <CloseBtn width={"20px"} height={"20px"} fill="white" />
         </button>
       )}
       <div

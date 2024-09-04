@@ -1,6 +1,6 @@
 import { useGenericQuery } from "@/apollo/fetcher";
 import { PHOTO_FRAGMENT, COMMENT_FRAGMENT } from "@/apollo/fragments";
-import { gql, QueryHookOptions } from "@apollo/client";
+import { gql, SuspenseQueryHookOptions } from "@apollo/client";
 
 export const SEE_PHOTO_QUERY = gql`
   query seePhoto($id: Int!) {
@@ -23,6 +23,6 @@ export const SEE_PHOTO_QUERY = gql`
   ${COMMENT_FRAGMENT}
 `;
 
-export const useSeePhoto = (options?: QueryHookOptions) => {
+export const useSeePhoto = (options?: SuspenseQueryHookOptions) => {
   return useGenericQuery(SEE_PHOTO_QUERY, { ...options });
 };

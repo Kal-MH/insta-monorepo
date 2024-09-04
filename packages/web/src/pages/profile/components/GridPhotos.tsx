@@ -7,10 +7,6 @@ import PhotoModal from "@/pages/home/components/PhotoModal";
 import { useState } from "react";
 import Photo from "./Photo";
 
-interface PhotoProps {
-  bg: string;
-}
-
 interface GridPhotosProps {
   photos: PhotoGraphqlProps[];
 }
@@ -28,12 +24,12 @@ const GridPhotos = ({ photos = [] }: GridPhotosProps) => {
     <>
       <Grid>
         {photos.map((photo: PhotoGraphqlProps, idx) => (
-          <PhotoContainer
-            key={photo.id}
-            bg={photo.file}
-            onClick={() => handlePhotoClick(idx)}
-          >
-            <Photo src={photo.file} alt="photo" placeholder="/profile.png" />
+          <PhotoContainer key={photo.id} onClick={() => handlePhotoClick(idx)}>
+            <Photo
+              src={photo.file}
+              alt="photo"
+              placeholder="http://via.placeholder.com/512x512"
+            />
             <Icons>
               <Icon>
                 <FontAwesomeIcon icon={faHeart} />
@@ -77,9 +73,7 @@ const Grid = styled.div`
   }
 `;
 
-const PhotoContainer = styled.div<PhotoProps>`
-  /* background-image: url(${(props) => props.bg}); */
-  /* background-size: cover; */
+const PhotoContainer = styled.div`
   position: relative;
   cursor: pointer;
 `;

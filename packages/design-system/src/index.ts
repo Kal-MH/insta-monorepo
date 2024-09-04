@@ -13,3 +13,6 @@ export { default as Modal } from "./components/Modal/Modal";
 export { default as ModalHeader } from "./components/Modal/ModalHeader";
 export { default as ModalFooter } from "./components/Modal/ModalFooter";
 export { default as ModalContent } from "./components/Modal/ModalContent";
+
+export { default as SkeletonBox } from "./components/Skeleton/SkeletonBox";
+export { default as SkeletonParagraph } from "./components/Skeleton/SkeletonParagraph";

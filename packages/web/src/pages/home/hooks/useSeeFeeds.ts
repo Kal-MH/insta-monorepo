@@ -1,8 +1,22 @@
+import { SeeFeedsResult } from "@/__generated__/graphql";
 import { useGenericQuery } from "@/apollo/fetcher";
 import { PHOTO_FRAGMENT, COMMENT_FRAGMENT } from "@/apollo/fragments";
-import { gql, QueryHookOptions } from "@apollo/client";
+import {
+  gql,
+  SuspenseQueryHookOptions,
+  TypedDocumentNode,
+} from "@apollo/client";
 
-export const FEED_QUERY = gql`
+interface DataProps {
+  seeFeeds: SeeFeedsResult;
+}
+
+interface VariablesProps {
+  lastId?: number;
+  limit: number;
+}
+
+export const FEED_QUERY: TypedDocumentNode<DataProps, VariablesProps> = gql`
   query seeFeeds($lastId: Int, $limit: Int) {
     seeFeeds(lastId: $lastId, limit: $limit) {
       ...PhotoFragment
@@ -23,6 +37,6 @@ export const FEED_QUERY = gql`
   ${COMMENT_FRAGMENT}
 `;
 
-export const useSeeFeeds = (options?: QueryHookOptions) => {
+export const useSeeFeeds = (options?: SuspenseQueryHookOptions) => {
   return useGenericQuery(FEED_QUERY, { ...options });
 };

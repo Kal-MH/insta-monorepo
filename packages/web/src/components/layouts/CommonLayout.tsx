@@ -35,6 +35,7 @@ const Content = styled.div`
   overflow-y: auto;
   display: flex;
   justify-content: center;
+  box-sizing: border-box;
 
   -ms-overflow-style: none;
   &::-webkit-scrollbar {

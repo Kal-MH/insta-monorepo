@@ -1,16 +1,19 @@
 import {
   DocumentNode,
   QueryHookOptions,
+  SuspenseQueryHookOptions,
+  TypedDocumentNode,
   useMutation,
   useQuery,
+  useSuspenseQuery,
 } from "@apollo/client";
 import toast from "react-hot-toast";
 
 export const useGenericQuery = (
-  graphql: DocumentNode,
-  options: QueryHookOptions
+  graphql: TypedDocumentNode<any, any>,
+  options: SuspenseQueryHookOptions
 ) => {
-  const result = useQuery(graphql, options);
+  const result = useSuspenseQuery(graphql, options);
 
   if (result?.error) {
     const { error } = result;

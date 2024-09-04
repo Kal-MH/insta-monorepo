@@ -4,6 +4,8 @@ import { SEARCH_PHOTO_QUERY } from "./hooks/useSearchPhoto";
 import LoginLayout, { authStatusType } from "@/components/layouts/LoginLayout";
 import ApiErrorBoundary from "@/components/error/ApiErrorBoundary";
 import PhotoList from "./components/PhotoList";
+import { Suspense } from "react";
+import SkeletonGrid from "./components/SkeletonGrid";
 
 const Explore = () => {
   const [searchParams] = useSearchParams();
@@ -13,7 +15,9 @@ const Explore = () => {
     <LoginLayout authStatus={authStatusType.NEED_LOGIN}>
       <CommonLayout>
         <ApiErrorBoundary query={SEARCH_PHOTO_QUERY}>
-          <PhotoList keyword={keyword as string} />
+          <Suspense fallback={<SkeletonGrid />}>
+            <PhotoList keyword={keyword as string} />
+          </Suspense>
         </ApiErrorBoundary>
       </CommonLayout>
     </LoginLayout>
