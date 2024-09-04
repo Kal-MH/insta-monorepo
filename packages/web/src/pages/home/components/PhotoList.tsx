@@ -41,8 +41,6 @@ const PhotoList = () => {
     });
   };
 
-  console.log(data);
-
   const { targetRef, setLoadFinished } = useInfiniteScroll(refetchHandler);
 
   return (

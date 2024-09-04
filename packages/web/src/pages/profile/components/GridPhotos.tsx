@@ -28,7 +28,7 @@ const GridPhotos = ({ photos = [] }: GridPhotosProps) => {
             <Photo
               src={photo.file}
               alt="photo"
-              placeholder="http://via.placeholder.com/512x512"
+              placeholder="https://via.placeholder.com/512x512"
             />
             <Icons>
               <Icon>

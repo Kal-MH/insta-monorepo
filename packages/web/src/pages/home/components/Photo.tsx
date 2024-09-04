@@ -30,6 +30,7 @@ const Photo = ({ photo, onCommentClick }: PhotoProps) => {
               size={30}
               src={user.avatar as string}
               placeholder="/profile.png"
+              alt="avatar"
             />
           </Link>
           <Link to={`/users/${user.username}`}>
@@ -39,7 +40,7 @@ const Photo = ({ photo, onCommentClick }: PhotoProps) => {
         <PhotoFile>
           <img
             ref={imageRef}
-            src={loaded ? file : "http://via.placeholder.com/512x512"}
+            src={loaded ? file : "https://via.placeholder.com/512x512"}
             alt="photo"
           />
         </PhotoFile>
@@ -79,7 +80,7 @@ const PhotoContainer = styled.div`
   background-color: white;
   border-radius: 4px;
   border: 1px solid ${(props) => props.theme.borderColor};
-  max-width: 500px;
+  max-width: 60rem;
 `;
 const PhotoHeader = styled.div`
   padding: 15px;
@@ -93,7 +94,7 @@ const Username = styled(FatText)`
 `;
 
 const PhotoFile = styled.div`
-  max-width: 500px;
+  max-width: 60rem;
   aspect-ratio: 1 / 1;
 
   img {

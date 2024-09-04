@@ -90,14 +90,14 @@ const Container = styled.div`
 
   @media ${(props) => props.theme.device.tablet} {
     flex-direction: column;
-    max-width: 50rem;
-    max-height: 60rem;
+    max-width: 65rem;
+    max-height: 70rem;
   }
 
   @media ${(props) => props.theme.device.mobile} {
     flex-direction: column;
-    max-width: 40rem;
-    max-height: 50rem;
+    max-width: 55rem;
+    max-height: 60rem;
   }
 `;
 
@@ -118,12 +118,11 @@ const LeftContainer = styled.div`
   }
 
   @media ${(props) => props.theme.device.tablet} {
-    max-width: 50rem;
-    max-height: 35rem;
+    max-height: 45rem;
   }
 
   @media ${(props) => props.theme.device.mobile} {
-    max-height: 30rem;
+    max-height: 40rem;
   }
 `;
 const RightContainer = styled.div`

@@ -6,6 +6,7 @@ import ApiErrorBoundary from "@/components/error/ApiErrorBoundary";
 import PhotoList from "./components/PhotoList";
 import { Suspense } from "react";
 import SkeletonGrid from "./components/SkeletonGrid";
+import PageTitle from "@/components/PageTitle";
 
 const Explore = () => {
   const [searchParams] = useSearchParams();
@@ -14,6 +15,7 @@ const Explore = () => {
   return (
     <LoginLayout authStatus={authStatusType.NEED_LOGIN}>
       <CommonLayout>
+        <PageTitle title="Explore" />
         <ApiErrorBoundary query={SEARCH_PHOTO_QUERY}>
           <Suspense fallback={<SkeletonGrid />}>
             <PhotoList keyword={keyword as string} />
