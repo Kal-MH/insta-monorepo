@@ -18,7 +18,7 @@ const Container = styled(BaseBox)`
   padding: 35px 40px 25px 40px;
   margin-bottom: 10px;
   box-sizing: border-box;
-  border: 1px solid ${(props) => props.theme.borderColor};
+  /* border: 1px solid ${(props) => props.theme.borderColor}; */
   background-color: ${(props) => props.theme.bgColor};
 
   form {

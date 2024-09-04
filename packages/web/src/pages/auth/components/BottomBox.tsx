@@ -29,7 +29,7 @@ export default BottomBox;
 const SBottomBox = styled(BaseBox)`
   padding: 20px 0px;
   text-align: center;
-  border: 1px solid ${(props) => props.theme.borderColor};
+  /* border: 1px solid ${(props) => props.theme.borderColor}; */
   background-color: ${(props) => props.theme.bgColor};
   a {
     font-weight: 600;
