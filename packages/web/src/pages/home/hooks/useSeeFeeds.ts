@@ -1,5 +1,5 @@
 import { SeeFeedsResult } from "@/__generated__/graphql";
-import { useGenericQuery } from "@/apollo/fetcher";
+import { useGenericSuspenseQuery } from "@/apollo/fetcher";
 import { PHOTO_FRAGMENT, COMMENT_FRAGMENT } from "@/apollo/fragments";
 import {
   gql,
@@ -38,5 +38,5 @@ export const FEED_QUERY: TypedDocumentNode<DataProps, VariablesProps> = gql`
 `;
 
 export const useSeeFeeds = (options?: SuspenseQueryHookOptions) => {
-  return useGenericQuery(FEED_QUERY, { ...options });
+  return useGenericSuspenseQuery(FEED_QUERY, { ...options });
 };

@@ -1,5 +1,5 @@
 import { Photo } from "@/__generated__/graphql";
-import { useGenericQuery } from "@/apollo/fetcher";
+import { useGenericSuspenseQuery } from "@/apollo/fetcher";
 import { COMMENT_FRAGMENT, PHOTO_FRAGMENT } from "@/apollo/fragments";
 import {
   gql,
@@ -43,5 +43,5 @@ export const SEARCH_PHOTO_QUERY: TypedDocumentNode<
 `;
 
 export const useSearchPhoto = (options?: SuspenseQueryHookOptions) => {
-  return useGenericQuery(SEARCH_PHOTO_QUERY, { ...options });
+  return useGenericSuspenseQuery(SEARCH_PHOTO_QUERY, { ...options });
 };

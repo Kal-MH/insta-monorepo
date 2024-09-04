@@ -1,5 +1,5 @@
 import { Photo } from "@/__generated__/graphql";
-import { useGenericQuery } from "@/apollo/fetcher";
+import { useGenericSuspenseQuery } from "@/apollo/fetcher";
 import { COMMENT_FRAGMENT, PHOTO_PROFILE_FRAGMENT } from "@/apollo/fragments";
 import {
   gql,
@@ -54,5 +54,5 @@ export const SEE_PROFILE_QUERY: TypedDocumentNode<
 `;
 
 export const useSeeProfile = (options?: SuspenseQueryHookOptions) => {
-  return useGenericQuery(SEE_PROFILE_QUERY, { ...options });
+  return useGenericSuspenseQuery(SEE_PROFILE_QUERY, { ...options });
 };
