@@ -69,6 +69,7 @@ const Comment = ({
   const handleDeleteBtnClick = () => {
     deleteCommentMutation();
   };
+
   return (
     <Wrapper>
       <CommentContainer>
@@ -89,15 +90,17 @@ const Comment = ({
               <FatText>{author}</FatText>
             </Link>
             <CommentCaption>
-              {payload.split(" ").map((word, index) =>
-                /#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w-]+/.test(word) ? (
-                  <React.Fragment key={index}>
-                    <Link to={`/explore?tag=${word.slice(1)}`}>{word} </Link>
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment key={index}>{word} </React.Fragment>
-                )
-              )}
+              {payload.split(/(#[\w가-힣]+)/g).map((word, index) => {
+                if (word.startsWith("#")) {
+                  return (
+                    <React.Fragment key={index}>
+                      <Link to={`/explore?tag=${word.slice(1)}`}>{word} </Link>
+                    </React.Fragment>
+                  );
+                }
+
+                return <React.Fragment key={index}>{word} </React.Fragment>;
+              })}
             </CommentCaption>
           </CommentCaptionContainer>
           {createdAt && <TimeText>{formatTimeDifference(createdAt)}</TimeText>}
