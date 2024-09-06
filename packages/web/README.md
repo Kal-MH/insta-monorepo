@@ -1,3 +1,7 @@
+## Instagra Clone Coding (Web)
+- 배포 주소: [https://insta-monorepo-web.vercel.app/](https://insta-monorepo-web.vercel.app/)
+- backend 서버를 render.com 서비스로 운영하고 있습니다. Vercel의 serverless cool start로 인해서 초기 네트워크 통신이 느린데, 계속해서 원인을 찾고 있습니다.
+
 ### 기능
 
 instagram을 모방하여 간단한 SNS 기능의 웹 서비스를 제공합니다.
@@ -22,6 +26,15 @@ instagram을 모방하여 간단한 SNS 기능의 웹 서비스를 제공합니�
 - `/login` , `/sign-up` : 로그인, 회원가입
 - `/users/:username` : 프로필 페이지
 - `/explore` : 검색 페이지
+
+### 시연 영상
+#### Home(Feed)
+![front_v2_home6](https://github.com/user-attachments/assets/d4598d5d-0d02-4d6d-96bd-b165650db29c)
+#### Profile
+![front_v2_modal_profile](https://github.com/user-attachments/assets/8f391c96-4e6c-4110-afd2-930d454a8a3c)
+#### 반응형
+![front_v2_responsive5](https://github.com/user-attachments/assets/5c9febea-d435-46f5-8d97-ed162809161a)
+
 
 ### web service 실행 방법
 
