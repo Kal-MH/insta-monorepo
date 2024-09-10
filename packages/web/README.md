@@ -1,6 +1,7 @@
 ## Instagra Clone Coding (Web)
 - 배포 주소: [https://insta-monorepo-web.vercel.app/](https://insta-monorepo-web.vercel.app/)
-- backend 서버를 render.com 서비스로 운영하고 있습니다. Vercel의 serverless cool start로 인해서 초기 네트워크 통신이 느린데, 계속해서 원인을 찾고 있습니다.
+- backend 서버를 render.com 서비스로 운영하고 있으며, 서버와 DB가 모두 US west 지역에 있는 관계로 처음 요청 시에 응답 속도가 매우 느린 이슈가 있습니다.
+- 현재 다른 region으로 이관 작업 중에 있습니다. README.md에 있는 시연 영상도 참고해주시면 감사하겠습니다.
 
 ### 기능
 
