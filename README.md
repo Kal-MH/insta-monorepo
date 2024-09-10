@@ -4,8 +4,8 @@
 
 | Package name                                      | Description                                 |
 | ------------------------------------------------- | ------------------------------------------- |
-| [`@insta-monorepo/web`](./packages/colors)           | Simple SNS 클론 프로젝트(Instagram)                 |
-| [`@insta-monorepo/design-system`](./packages/icons-react) | insta-monorepo 디자인 시스템 UI 및 React 컴포넌트               |
+| [`@insta-monorepo/web`](./packages/web)           | Simple SNS 클론 프로젝트(Instagram)                 |
+| [`@insta-monorepo/design-system`](./packages/design-system) | insta-monorepo 디자인 시스템 UI 및 React 컴포넌트               |
 
 
 ### 전체 구조

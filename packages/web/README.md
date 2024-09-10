@@ -1,7 +1,9 @@
 ## Instagra Clone Coding (Web)
+
 - 배포 주소: [https://insta-monorepo-web.vercel.app/](https://insta-monorepo-web.vercel.app/)
-- backend 서버를 render.com 서비스로 운영하고 있으며, 서버와 DB가 모두 US west 지역에 있는 관계로 처음 요청 시에 응답 속도가 매우 느린 이슈가 있습니다.
-- 현재 다른 region으로 이관 작업 중에 있습니다. README.md에 있는 시연 영상도 참고해주시면 감사하겠습니다.
+- backend 서버를 render.com 서비스로 운영하고 있으며, Free instance로 운영하고 있습니다.
+- Free Instance의 경우, 처음 시작 시 서버 가동을 위해 **_최대 50초 정도 delay가 발생_**할 수 있습니다.
+- 현재 US west에 있는 서버와 DB를 다른 region으로 이관 작업 중에 있고, 다른 배포 방식으로 변경하는 것도 고려하고 있습니다. README.md에 있는 시연 영상도 참고해주시면 감사하겠습니다.
 
 ### 기능
 
@@ -29,13 +31,18 @@ instagram을 모방하여 간단한 SNS 기능의 웹 서비스를 제공합니�
 - `/explore` : 검색 페이지
 
 ### 시연 영상
-#### Home(Feed)
-![front_v2_home6](https://github.com/user-attachments/assets/d4598d5d-0d02-4d6d-96bd-b165650db29c)
-#### Profile
-![front_v2_modal_profile](https://github.com/user-attachments/assets/8f391c96-4e6c-4110-afd2-930d454a8a3c)
-#### 반응형
-![front_v2_responsive5](https://github.com/user-attachments/assets/5c9febea-d435-46f5-8d97-ed162809161a)
 
+#### Home(Feed)
+
+![front_v2_home6](https://github.com/user-attachments/assets/d4598d5d-0d02-4d6d-96bd-b165650db29c)
+
+#### Profile
+
+![front_v2_modal_profile](https://github.com/user-attachments/assets/8f391c96-4e6c-4110-afd2-930d454a8a3c)
+
+#### 반응형
+
+![front_v2_responsive5](https://github.com/user-attachments/assets/5c9febea-d435-46f5-8d97-ed162809161a)
 
 ### web service 실행 방법
 
