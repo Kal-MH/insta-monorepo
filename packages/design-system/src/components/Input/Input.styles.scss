@@ -23,6 +23,6 @@ $input-prefix: "#{$prefix}-input";
   //   }
 
   &.#{$input-prefix}--error {
-    border: 0.5px solid tomato;
+    border: 0.5px solid $danger;
   }
 }

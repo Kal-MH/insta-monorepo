@@ -10,7 +10,6 @@ $avatar-prefix: "#{$prefix}-avatar";
   vertical-align: middle;
   white-space: nowrap;
   overflow: hidden;
-  // background-color: #2c2c2c;
 
   &.#{$avatar-prefix}--shape-circle {
     border-radius: 50%;
