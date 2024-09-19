@@ -7,9 +7,9 @@ const navWidth = {
 };
 
 const breakPoints = {
-  desktop: 1200,
+  desktop: 1280,
   tablet: 768,
-  mobile: 600,
+  mobile: 360,
 };
 
 const device = {
