@@ -1,7 +1,3 @@
-## Instagra Clone Coding (Web)
-
-- 배포 주소: [https://insta-monorepo-web.vercel.app/](https://insta-monorepo-web.vercel.app/)
-
 ### 기능
 
 instagram을 모방하여 간단한 SNS 기능의 웹 서비스를 제공합니다.
